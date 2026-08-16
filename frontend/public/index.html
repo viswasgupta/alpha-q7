@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Alpha Q7 Trading Institute - Forex, Commodities and Crypto Trading Education" name="description"/>
+<title>
+        Alpha Q7 Trading Institute
+    </title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Manrope:wght@500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap"
+    rel="stylesheet"
+/>
+<link href="css/style.css" rel="stylesheet"/>
+<meta content="#0F2573" name="theme-color"/>
+<meta content="website" property="og:type"/>
+<meta content="Alpha Q7 Trading Institute" property="og:title"/>
+<meta content="Forex, Commodities and Crypto Trading Education with practical market analysis and disciplined risk management." property="og:description"/>
+<meta content="assets/alpha-q7-logo.png" property="og:image"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Alpha Q7 Trading Institute" name="twitter:title"/>
+<meta content="Forex, Commodities and Crypto Trading Education." name="twitter:description"/>
+<link href="assets/alpha-q7-logo.png" rel="icon" type="image/png"/>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<!-- =========================================================
+     LIVE MOVING CANDLE BACKGROUND
+========================================================= -->
+<canvas aria-hidden="true" id="marketBackground"></canvas>
+<div aria-hidden="true" class="background-overlay"></div>
+<!-- =========================================================
+     HEADER
+========================================================= -->
+<header class="site-header">
+<div class="container nav-container">
+<a class="brand" href="#home">
+<img alt="Alpha Q7 Trading Institute" class="brand-logo" src="assets/alpha-q7-logo.png"/>
+</a>
+<div class="institute-name">
+    ALPHA Q7 TRADING INSTITUTE
+</div>
+<button aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation" class="menu-toggle" id="menuToggle" type="button">
+<span></span>
+<span></span>
+<span></span>
+</button>
+<nav class="main-nav" id="mainNav">
+<a data-content="nav.home" href="#home">Home</a>
+<a data-content="nav.about" href="#about">About</a>
+<a data-content="nav.brochure" href="#brochure">Brochure</a>
+<a data-content="nav.testimonials" href="#testimonials">Testimonials</a>
+<a data-content="nav.faq" href="#faq">FAQ</a>
+<a class="nav-cta" href="#masterclass">Enroll</a>
+</nav>
+</div>
+</header>
+<!-- =========================================================
+     REAL LIVE TRADINGVIEW MARKET TICKER
+========================================================= -->
+<section aria-label="Live market prices" class="live-market-bar">
+<div class="market-status">
+<span class="live-dot"></span>
+<span>LIVE MARKET</span>
+</div>
+<div class="market-ticker alpha-q7-live-ticker">
+<div class="tradingview-widget-container" style="height:100%;width:100%;">
+<div class="tradingview-widget-container__widget" style="height:100%;width:100%;"></div>
+<script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" type="text/javascript">
+            {
+                "symbols": [
+                    { "proName": "FX:EURUSD", "title": "EUR / USD" },
+                    { "proName": "FX:GBPUSD", "title": "GBP / USD" },
+                    { "proName": "FX:USDJPY", "title": "USD / JPY" },
+                    { "proName": "FX:USDCHF", "title": "USD / CHF" },
+                    { "proName": "FX:AUDUSD", "title": "AUD / USD" },
+                    { "proName": "FX:USDCAD", "title": "USD / CAD" },
+                    { "proName": "FX:NZDUSD", "title": "NZD / USD" },
+                    { "proName": "FX:EURGBP", "title": "EUR / GBP" },
+                    { "proName": "FX:EURJPY", "title": "EUR / JPY" },
+                    { "proName": "FX:GBPJPY", "title": "GBP / JPY" },
+                    { "proName": "OANDA:XAUUSD", "title": "Gold / USD" }
+                ],
+                "colorTheme": "dark",
+                "isTransparent": false,
+                "displayMode": "adaptive",
+                "locale": "en"
+            }
+            </script>
+</div>
+</div>
+</section>
+<main id="main-content">
+<!-- =========================================================
+     HERO
+========================================================= -->
+<section class="hero-section" id="home">
+<div class="container hero-grid">
+<div class="hero-content">
+<span class="eyebrow" data-content="hero.eyebrow">LEARN. ANALYZE. TRADE. SUCCEED.</span>
+<h1><span data-content="hero.title">MASTER THE MARKETS.</span> <span data-content="hero.accent">BUILD YOUR FUTURE.</span></h1>
+<p data-content="hero.description" id="heroDescription">Learn Forex, Commodities and Crypto Trading through structured education, practical market analysis and disciplined risk management.</p>
+<div class="hero-markets">
+<div class="market-chip">
+<div class="market-icon">
+                        $
+                    </div>
+<div>
+<strong>
+                            FOREX
+                        </strong>
+<small>
+                            Currency Markets
+                        </small>
+</div>
+</div>
+<div class="market-chip">
+<div class="market-icon">
+                        ◉
+                    </div>
+<div>
+<strong>
+                            COMMODITIES
+                        </strong>
+<small>
+                            Gold, Oil &amp; Silver
+                        </small>
+</div>
+</div>
+<div class="market-chip">
+<div class="market-icon">
+                        ₿
+                    </div>
+<div>
+<strong>
+                            CRYPTO
+                        </strong>
+<small>
+                            Digital Assets
+                        </small>
+</div>
+</div>
+</div>
+</div>
+<!-- =================================================
+             MASTERCLASS FORM
+        ================================================== -->
+<div class="masterclass-card" id="masterclass">
+    <div class="masterclass-heading">
+        <h2>ENROLL NOW</h2>
+        <p>Start your trading journey with Alpha Q7.</p>
+    </div>
+<form id="leadForm">
+<div class="form-group">
+<label for="fullName">
+                        Full Name
+                    </label>
+<input id="fullName" name="fullName" placeholder="Enter your full name" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="mobile">
+                        Mobile Number
+                    </label>
+<input id="mobile" inputmode="numeric" maxlength="10" name="mobile" pattern="[0-9]{10}" placeholder="10 digit mobile number" required="" type="tel"/>
+</div>
+<div class="form-group">
+<label for="email">
+                        Email Address
+                    </label>
+<input autocomplete="email" id="email" name="email" placeholder="Enter your email address" type="email"/>
+</div>
+<div class="form-group">
+<label for="experience">
+                        Experience Level
+                    </label>
+<select id="experience" name="experience" required="">
+<option value="">
+                            Select experience
+                        </option>
+<option value="Beginner">
+                            Beginner
+                        </option>
+<option value="Intermediate">
+                            Intermediate
+                        </option>
+<option value="Advanced">
+                            Advanced
+                        </option>
+</select>
+</div>
+<button class="primary-button full-width" type="submit">
+                    RESERVE MY SEAT
+                </button>
+<p class="privacy-note" data-content="masterclass.privacy">🔒 We respect your privacy. No spam.</p>
+</form>
+<div class="form-success" hidden="" id="formSuccess">
+<div class="success-icon">
+                    ✓
+                </div>
+<h3 data-content="masterclass.successTitle">Registration Successful</h3>
+<p data-content="masterclass.successDescription">Your details have been saved. WhatsApp is opening now.</p>
+<a class="whatsapp-button" data-content="masterclass.successButton" href="#" id="successWhatsapp" rel="noopener noreferrer" target="_blank">💬 CONNECT ON WHATSAPP</a>
+<button class="secondary-button full-width" data-content="masterclass.againButton" id="resetForm" type="button">REGISTER ANOTHER PERSON</button>
+</div>
+</div>
+</div>
+</section>
+<!-- =========================================================
+     STATS
+========================================================= -->
+<section class="stats-section">
+<div class="container stats-grid">
+<div class="stat-item">
+<strong id="statStudents">
+                Structured
+            </strong>
+<span>
+                Learning
+            </span>
+</div>
+<div class="stat-item">
+<strong id="statMentors">
+                Practical
+            </strong>
+<span>
+                Market Analysis
+            </span>
+</div>
+<div class="stat-item">
+<strong id="statHours">
+                Multi-market
+            </strong>
+<span>
+                Forex · Commodities · Crypto
+            </span>
+</div>
+<div class="stat-item">
+<strong id="statSatisfaction">
+                Risk-first
+            </strong>
+<span>
+                Trading Education
+            </span>
+</div>
+</div>
+</section>
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+<section class="section" id="about">
+    <div class="container">
+
+        <div class="section-heading">
+            <span class="eyebrow">ABOUT ALPHA Q7 TRADING INSTITUTE</span>
+
+            <h2>
+                Don't Chase the Market.
+                <span class="about-gold">Master It.</span>
+            </h2>
+        </div>
+
+        <div class="about-copy">
+
+            <p>
+                At Alpha Q7 Trading Institute, we see trading as a skill built through
+                market knowledge, strategic thinking, discipline, and responsible risk management.
+            </p>
+
+            <p>
+                We aim to equip aspiring traders with the clarity and practical understanding
+                needed to navigate financial markets with confidence.
+            </p>
+
+            <p>
+                Our approach combines market analysis, trading strategies, risk awareness,
+                and real-world concepts to develop better decision-making.
+            </p>
+
+            <p>
+                Whether you're starting out or refining your abilities, Alpha Q7 offers a
+                focused path to Learn. Practice. Analyze. Improve.
+            </p>
+
+        </div>
+
+    </div>
+</section>
+<!-- =========================================================
+     COURSES
+========================================================= -->
+<section class="section light-section" id="courses">
+<div class="container">
+<div class="section-heading centered">
+<span class="eyebrow" data-content="coursesSection.eyebrow">OUR COURSES</span>
+<h2><span data-content="coursesSection.title">Explore our</span> <span data-content="coursesSection.accent">trading programs.</span></h2>
+<p data-content="coursesSection.description">Select a course to see complete information.</p>
+</div>
+<div class="course-accordion" id="courseAccordion"></div>
+</div>
+</section>
+<!-- =========================================================
+     MARKET ANALYSIS
+========================================================= -->
+<section class="section" id="market-analysis">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow" data-content="analysis.eyebrow">REAL MARKET ANALYSIS</span>
+<h2><span data-content="analysis.title">Analyze</span> <span data-content="analysis.accent">XAU / USD live.</span></h2>
+<p data-content="analysis.description">Monitor Gold Spot against the U.S. Dollar.</p>
+</div>
+<div class="analysis-layout">
+<div class="analysis-chart-card">
+<div class="analysis-chart-header">
+<div class="analysis-symbol">
+<span class="real-live-dot"></span>
+<div>
+<strong data-content="analysis.symbol">XAU / USD</strong>
+<small data-content="analysis.symbolDescription">Gold Spot / U.S. Dollar</small>
+</div>
+</div>
+<span class="analysis-live-label" data-content="analysis.liveLabel">LIVE</span>
+</div>
+<div class="analysis-chart">
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+<div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+<script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" type="text/javascript">
+
+                        {
+                            "autosize": true,
+                            "symbol": "OANDA:XAUUSD",
+                            "interval": "15",
+                            "timezone": "Asia/Kolkata",
+                            "theme": "dark",
+                            "style": "1",
+                            "locale": "en",
+                            "backgroundColor": "#0A1024",
+                            "gridColor": "rgba(255,255,255,0.06)",
+                            "hide_top_toolbar": true,
+                            "hide_side_toolbar": true,
+                            "hide_legend": false,
+                            "hide_volume": true,
+                            "allow_symbol_change": false,
+                            "withdateranges": false,
+                            "save_image": false,
+                            "calendar": false,
+                            "support_host": "https://www.tradingview.com"
+                        }
+
+                        </script>
+</div>
+</div>
+</div>
+<div class="analysis-content" id="analysisCards">
+<div class="analysis-card">
+<span>
+                        01
+                    </span>
+<h3>
+                        Market Structure
+                    </h3>
+<p>
+                        Read trends, swing highs,
+                        swing lows, support and resistance.
+                    </p>
+</div>
+<div class="analysis-card">
+<span>
+                        02
+                    </span>
+<h3>
+                        Technical Analysis
+                    </h3>
+<p>
+                        Study candles, patterns,
+                        momentum and price action.
+                    </p>
+</div>
+<div class="analysis-card">
+<span>
+                        03
+                    </span>
+<h3>
+                        Risk Management
+                    </h3>
+<p>
+                        Set risk per trade, position size,
+                        stops and targets responsibly.
+                    </p>
+</div>
+<div class="analysis-card">
+<span>
+                        04
+                    </span>
+<h3>
+                        Trading Psychology
+                    </h3>
+<p>
+                        Build patience, discipline
+                        and consistency.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- =========================================================
+     WHAT YOU'LL LEARN
+========================================================= -->
+<section class="section light-section" id="learn">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow" data-content="learnSection.eyebrow">WHAT YOU'LL LEARN</span>
+<h2><span data-content="learnSection.title">Build a complete</span> <span data-content="learnSection.accent">trading foundation.</span></h2>
+<p data-content="learnSection.description">Learn the market from fundamentals through structured trading practice.</p>
+</div>
+<div class="learn-grid" id="learnGrid"></div>
+</div>
+</section>
+<!-- =========================================================
+     BROCHURE
+========================================================= -->
+<section class="section" id="brochure">
+<div class="container brochure-card">
+<div>
+<span class="eyebrow" data-content="brochure.eyebrow">ALPHA Q7 BROCHURE</span>
+<h2><span data-content="brochure.title">Download the</span> <span data-content="brochure.accent">course brochure.</span></h2>
+<p data-content="brochure.description">Get the complete Alpha Q7 program information.</p>
+</div>
+<a class="primary-button" data-content="brochure.button" download="Alpha-Q7-Trading-Institute-Brochure.pdf" href="assets/alpha-q7-brochure.pdf" id="downloadBrochure">DOWNLOAD BROCHURE</a>
+</div>
+</section>
+<!-- =========================================================
+     WHY CHOOSE ALPHA Q7
+========================================================= -->
+<section class="section why-alpha-section" id="why-alpha">
+<div class="container">
+<div id="whyAlphaContainer"></div>
+</div>
+</section>
+
+<!-- =========================================================
+     TESTIMONIALS
+========================================================= -->
+<section class="section light-section" id="testimonials">
+<div class="container">
+<div class="section-heading centered">
+<span class="eyebrow" data-content="testimonialsSection.eyebrow">STUDENT EXPERIENCES</span>
+<h2><span data-content="testimonialsSection.title">Learn from</span> <span data-content="testimonialsSection.accent">others.</span></h2>
+</div>
+<div class="testimonial-grid" id="testimonialGrid"></div>
+</div>
+</section>
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+<section class="section" id="faq">
+<div class="container faq-container">
+<div class="section-heading centered">
+<span class="eyebrow" data-content="faqSection.eyebrow">FAQ</span>
+<h2><span data-content="faqSection.title">Frequently asked</span> <span data-content="faqSection.accent">questions.</span></h2>
+</div>
+<div class="faq-list" id="faqList"></div>
+</div>
+</section>
+
+<!-- =========================================================
+     CUSTOM SECTIONS
+========================================================= -->
+<div id="customSectionsContainer"></div>
+<!-- =========================================================
+     DISCLAIMER
+========================================================= -->
+<section class="disclaimer-section">
+<div class="container">
+<div class="disclaimer-content">
+<h2>Risk Disclaimer & Legal Notice</h2>
+<div class="disclaimer-text">
+<p><strong>Risk Disclaimer:</strong> Foreign exchange (forex) trading carries a high level of risk, involves leverage where small market moves create large impacts, and can result in losing more than your initial deposit. Past performance does not guarantee future results. You should only trade with risk capital that you can afford to lose.</p>
+<p><strong>Educational Purpose Only:</strong> Alpha Q7 is not SEBI registered. All content, courses, and materials provided on this platform are for educational purposes only and should not be considered as financial advice or investment recommendations.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+<footer class="site-footer" id="siteFooter">
+<div class="container footer-grid">
+<div class="footer-brand">
+<img alt="Alpha Q7 Trading Institute" id="footerLogo" src="assets/alpha-q7-logo.png"/>
+<p id="footerDescription"></p>
+<div aria-label="Social media links" class="footer-socials" id="footerSocials"></div>
+</div>
+<div class="footer-columns-rendered" id="footerColumns"></div>
+<div class="footer-contact-area">
+<div class="footer-column">
+<h4 id="footerContactTitle">Contact</h4>
+<a href="#" id="footerWhatsapp" rel="noopener noreferrer" target="_blank"></a>
+<a href="#" id="footerEmail"></a>
+<a class="footer-address" href="#" id="footerAddress" rel="noopener noreferrer" target="_blank"></a>
+</div>
+<a aria-label="Contact Alpha Q7 on WhatsApp" class="footer-qr" href="#" id="footerQrLink" rel="noopener noreferrer" target="_blank">
+<img alt="Alpha Q7 QR Code" hidden="" id="footerQr" src=""/>
+</a>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="container footer-bottom-inner">
+<span id="footerCopyright"></span>
+<span id="footerDisclaimer"></span>
+<span class="footer-legal-links" id="footerLegalLinks"></span>
+</div>
+</div>
+</footer>
+<!-- =========================================================
+     BROCHURE ENQUIRY MODAL
+========================================================= -->
+<div class="brochure-modal" hidden="" id="brochureModal">
+<div class="brochure-modal-overlay" id="brochureModalOverlay"></div>
+<div class="brochure-modal-card">
+<button class="brochure-close" id="closeBrochureModal" type="button">
+            ×
+        </button>
+<div class="brochure-modal-header">
+<span class="eyebrow">
+                ALPHA Q7 BROCHURE
+            </span>
+<h2>
+                Get the complete
+                <span>course brochure.</span>
+</h2>
+<p>
+                Enter your details to receive the
+                Alpha Q7 Trading Institute brochure.
+            </p>
+</div>
+<form id="brochureEnquiryForm">
+<div class="brochure-field">
+<label for="brochureName">
+                    Full Name
+                </label>
+<input id="brochureName" name="fullName" placeholder="Enter your full name" required="" type="text"/>
+</div>
+<div class="brochure-field">
+<label for="brochureMobile">
+                    Mobile Number
+                </label>
+<input id="brochureMobile" inputmode="numeric" autocomplete="tel" maxlength="10" name="mobile" pattern="[0-9]{10}" placeholder="10 digit mobile number" required="" type="tel"/>
+</div>
+<div class="brochure-field">
+<label for="brochureEmail">
+                    Email Address
+                </label>
+<input id="brochureEmail" name="email" placeholder="Enter your email address" type="email"/>
+</div>
+<div class="brochure-field">
+<label for="brochureExperience">
+                    Trading Experience
+                </label>
+<select id="brochureExperience" name="experience" required="">
+<option value="">
+                        Select experience
+                    </option>
+<option value="Beginner">
+                        Beginner
+                    </option>
+<option value="Intermediate">
+                        Intermediate
+                    </option>
+<option value="Advanced">
+                        Advanced
+                    </option>
+</select>
+</div>
+<button class="primary-button full-width" type="submit" style="background: linear-gradient(135deg, #f8dc79, #ad7814); color: #1b1207; font-weight: 800; border: none; height: 52px; margin-top: 8px;">
+                GET BROCHURE
+            </button>
+<p class="brochure-privacy">
+                🔒 Your details are safe with us.
+            </p>
+</form>
+<div class="brochure-success" hidden="" id="brochureSuccess">
+<div class="brochure-success-icon">✓</div>
+<h3 style="color: #ffffff; margin: 8px 0 10px; font-size: 24px;">Thank You!</h3>
+<p>Your enquiry has been received and saved to our database. Your brochure is ready to download.</p>
+<a class="primary-button full-width" download="Alpha-Q7-Trading-Institute-Brochure.pdf" href="assets/alpha-q7-brochure.pdf" id="brochureDownloadLink" style="background: linear-gradient(135deg, #f8dc79, #ad7814); color: #1b1207; font-weight: 800; border: none; margin-top: 14px;">
+                DOWNLOAD BROCHURE
+            </a>
+<a class="whatsapp-button full-width" href="#" id="brochureWhatsapp" rel="noopener noreferrer" target="_blank" style="background: #25a85a; color: white; border: none; margin-top: 10px; font-weight: 800;">
+                💬 CONNECT ON WHATSAPP
+            </a>
+</div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<button aria-label="Back to top" class="back-top" id="backTop" type="button">
+    ↑
+</button>
+<script src="js/script.js"></script>
+</body>
+</html>

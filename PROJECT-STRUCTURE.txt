@@ -1,0 +1,22 @@
+ALPHA Q7 PROJECT STRUCTURE — PUBLIC ONLY
+
+frontend/
+  public/       Public Alpha Q7 website
+
+backend/
+  server/       Node.js + Express API and PostgreSQL integration
+  scripts/      Test/utility scripts
+  start-windows.bat
+  package.json / package-lock.json
+
+database/
+  db.seed.json   Sanitized development seed data
+  README.md      Database/setup notes
+  LOCAL-RUN.md   Local run notes
+  CMS-REFERENCE.md
+
+IMPORTANT:
+- React Admin frontend removed.
+- Protected management APIs retained for future/private use.
+- No .env or node_modules included.
+- Production should use PostgreSQL via DATABASE_URL.

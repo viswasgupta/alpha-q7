@@ -1,0 +1,14 @@
+node_modules/
+server/.env
+server/uploads/*
+!server/uploads/.gitkeep
+admin-react/dist/
+.DS_Store
+npm-debug.log*
+
+
+server/data/db.json
+server/data/*.tmp
+
+server/backups/*
+!server/backups/.gitkeep

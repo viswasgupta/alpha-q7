@@ -1,0 +1,25 @@
+{
+  "name": "alpha-q7-trading-institute",
+  "private": true,
+  "type": "module",
+  "version": "2.0.0",
+  "scripts": {
+    "predev": "node -e \"if(process.env.NODE_ENV!=='production') console.log('Use server/.env locally; credentials are never generated automatically.')\"",
+    "install:all": "npm install && npm install --prefix server",
+    "dev": "npm run dev --prefix server",
+    "build": "echo Public website uses static frontend files; no Admin build required.",
+    "start": "npm start --prefix server"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "zod": "^4.0.17"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+**/dist/
+**/build/
+
+# Runtime uploads
+uploads/
+**/uploads/
+
+# Local databases / backups
+*.db
+*.sqlite
+*.sqlite3
+backups/
+**/backups/
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Archives
+*.zip

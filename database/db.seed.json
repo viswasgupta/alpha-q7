@@ -1,0 +1,674 @@
+{
+  "content": {
+    "site": {
+      "nav": {
+        "home": "Home",
+        "about": "About",
+        "brochure": "Brochure",
+        "testimonials": "Testimonials",
+        "faq": "FAQ",
+        "masterclass": "Enroll"
+      },
+      "ticker": {
+        "label": "LIVE MARKET"
+      },
+      "hero": {
+        "eyebrow": "LEARN. ANALYZE. TRADE. SUCCEED.",
+        "title": "MASTER THE MARKETS",
+        "accent": "BUILD YOUR FUTURE.",
+        "description": "Learn Forex, Commodities and Crypto Trading through structured education, practical market analysis and disciplined risk management.",
+        "cta": "RESERVE MY SEAT"
+      },
+      "masterclass": {
+        "eyebrow": "FREE MASTERCLASS",
+        "accent": "FREE",
+        "title": "MASTERCLASS",
+        "description": "Reserve your seat for the upcoming session.",
+        "successTitle": "Registration Successful",
+        "successDescription": "Your details have been saved. WhatsApp is opening now.",
+        "successButton": "\ud83d\udcac CONNECT ON WHATSAPP",
+        "againButton": "REGISTER ANOTHER PERSON",
+        "privacy": "\ud83d\udd12 We respect your privacy. No spam."
+      },
+      "about": {
+        "eyebrow": "ABOUT ALPHA Q7",
+        "title": "Learn the market.",
+        "accent": "Trade with discipline.",
+        "description": "Alpha Q7 focuses on practical market education, technical analysis, risk management and trading psychology.",
+        "cards": [
+          {
+            "id": "about-1",
+            "number": "01",
+            "title": "Structured Learning",
+            "text": "Build your understanding from fundamentals to practical market analysis."
+          },
+          {
+            "id": "about-2",
+            "number": "02",
+            "title": "Practical Strategies",
+            "text": "Understand charts, market structure, setups and technical analysis."
+          },
+          {
+            "id": "about-3",
+            "number": "03",
+            "title": "Risk First",
+            "text": "Learn disciplined capital protection and position sizing."
+          }
+        ]
+      },
+      "stats": {
+        "students": {
+          "value": "Structured",
+          "label": "Learning"
+        },
+        "mentors": {
+          "value": "Practical",
+          "label": "Market Analysis"
+        },
+        "hours": {
+          "value": "Multi-market",
+          "label": "Forex \u00b7 Commodities \u00b7 Crypto"
+        },
+        "satisfaction": {
+          "value": "Risk-first",
+          "label": "Trading Education"
+        }
+      },
+      "coursesSection": {
+        "eyebrow": "OUR COURSES",
+        "title": "Explore our",
+        "accent": "trading programs.",
+        "description": "Select a course to see complete information."
+      },
+      "analysis": {
+        "eyebrow": "REAL MARKET ANALYSIS",
+        "title": "Analyze",
+        "accent": "XAU / USD live.",
+        "description": "Monitor Gold Spot against the U.S. Dollar.",
+        "liveLabel": "LIVE",
+        "symbol": "XAU / USD",
+        "symbolDescription": "Gold Spot / U.S. Dollar",
+        "cards": [
+          {
+            "id": "analysis-1",
+            "number": "01",
+            "title": "Market Structure",
+            "text": "Read trends, swing highs, swing lows, support and resistance."
+          },
+          {
+            "id": "analysis-2",
+            "number": "02",
+            "title": "Technical Analysis",
+            "text": "Study candles, patterns, momentum and price action."
+          },
+          {
+            "id": "analysis-3",
+            "number": "03",
+            "title": "Risk Management",
+            "text": "Set risk per trade, position size, stops and targets responsibly."
+          },
+          {
+            "id": "analysis-4",
+            "number": "04",
+            "title": "Trading Psychology",
+            "text": "Build patience, discipline and consistency."
+          },
+          {
+            "id": "d14e1702-d39f-42a7-aaa1-434fda7f8981",
+            "number": "05",
+            "title": "Pyschology",
+            "text": ", driven primarily by fear and greed, and managed successfully through strict discipline and predefined rules."
+          }
+        ]
+      },
+      "learnSection": {
+        "eyebrow": "WHAT YOU'LL LEARN",
+        "title": "Build a complete",
+        "accent": "trading foundation.",
+        "description": "Learn the market from fundamentals through structured trading practice."
+      },
+      "brochure": {
+        "eyebrow": "ALPHA Q7 BROCHURE",
+        "title": "Download the",
+        "accent": "course brochure.",
+        "description": "Get the complete Alpha Q7 program information.",
+        "button": "DOWNLOAD BROCHURE"
+      },
+      "testimonialsSection": {
+        "eyebrow": "STUDENT EXPERIENCES",
+        "title": "Learn from",
+        "accent": "others."
+      },
+      "cta": {
+        "eyebrow": "LIMITED SEATS",
+        "title": "Start Your",
+        "accent": "Trading Journey.",
+        "description": "Join the free Alpha Q7 masterclass.",
+        "button": "RESERVE MY SEAT"
+      },
+      "faqSection": {
+        "eyebrow": "FAQ",
+        "title": "Frequently asked",
+        "accent": "questions."
+      },
+      "contact": {
+        "eyebrow": "CONTACT ALPHA Q7",
+        "title": "Ready to",
+        "accent": "connect?",
+        "description": "Talk to our team about courses, masterclasses and training.",
+        "whatsappLabel": "WHATSAPP",
+        "addressLabel": "INSTITUTE ADDRESS",
+        "cardTitle": "Message Alpha Q7",
+        "cardDescription": "Have a question? Contact us directly on WhatsApp.",
+        "button": "\ud83d\udcac MESSAGE US"
+      },
+      "footer": {
+        "description": "Alpha Q7 Trading Institute provides structured market education focused on analysis, discipline and responsible risk management.",
+        "logoSrc": "/assets/alpha-q7-logo.png",
+        "logoAlt": "Alpha Q7 Trading Institute",
+        "contactTitle": "Contact",
+        "contact": {
+          "whatsapp": "917353228777",
+          "phone": "+91 73532 28777",
+          "email": "",
+          "address": "22, 1st Floor, 1st Cross, Bannerghatta Rd, Bilekahalli, Bengaluru, Karnataka 560076",
+          "mapUrl": "https://share.google/PfG9yz9BAMR54yJkB"
+        },
+        "columns": [
+          {
+            "id": "explore",
+            "title": "Explore",
+            "links": [
+              {
+                "id": "home",
+                "label": "Home",
+                "url": "#home",
+                "target": "_self"
+              },
+              {
+                "id": "about",
+                "label": "About",
+                "url": "#about",
+                "target": "_self"
+              },
+              {
+                "id": "courses",
+                "label": "Courses",
+                "url": "#courses",
+                "target": "_self"
+              },
+              {
+                "id": "market-analysis",
+                "label": "Market Analysis",
+                "url": "#market-analysis",
+                "target": "_self"
+              }
+            ]
+          },
+          {
+            "id": "resources",
+            "title": "Resources",
+            "links": [
+              {
+                "id": "learn",
+                "label": "What You'll Learn",
+                "url": "#learn",
+                "target": "_self"
+              },
+              {
+                "id": "brochure",
+                "label": "Brochure",
+                "url": "#brochure",
+                "target": "_self"
+              },
+              {
+                "id": "testimonials",
+                "label": "Testimonials",
+                "url": "#testimonials",
+                "target": "_self"
+              },
+              {
+                "id": "faq",
+                "label": "FAQ",
+                "url": "#faq",
+                "target": "_self"
+              }
+            ]
+          }
+        ],
+        "socials": [
+          {
+            "id": "whatsapp",
+            "type": "whatsapp",
+            "label": "WhatsApp",
+            "url": "https://wa.me/917353228777"
+          },
+          {
+            "id": "instagram",
+            "type": "instagram",
+            "label": "Instagram",
+            "url": "https://www.instagram.com/alpha_q7_trading_institute/"
+          }
+        ],
+        "qrImage": "/uploads/1786649486326-82128fc4-93fa-4b72-8d70-8f838c875b88.png",
+        "bottom": {
+          "copyright": "\u00a9 2026 Alpha Q7 Trading Institute.",
+          "disclaimer": "Educational purposes only.",
+          "legalLinks": [
+            {
+              "id": "privacy",
+              "label": "Privacy",
+              "url": "privacy.html",
+              "target": "_self"
+            },
+            {
+              "id": "terms",
+              "label": "Terms",
+              "url": "terms.html",
+              "target": "_self"
+            },
+            {
+              "id": "risk",
+              "label": "Risk & Course Policy",
+              "url": "risk-refund.html",
+              "target": "_self"
+            }
+          ]
+        }
+      },
+      "whatsapp": "917353228777",
+      "phoneDisplay": "+91 73532 28777",
+      "address": "22, 1st Floor, 1st Cross, Bannerghatta Rd, Bilekahalli, Bengaluru, Karnataka 560076",
+      "students": "Structured",
+      "mentors": "Practical",
+      "hours": "Multi-market",
+      "satisfaction": "Risk-first",
+      "whyAlpha": {
+        "eyebrow": "WHY ALPHA Q7",
+        "title": "Why You Should Choose Alpha Q7",
+        "subtitle": "",
+        "alphaHeading": "Alpha Q7",
+        "otherHeading": "Other Trading Institutes",
+        "comparisons": [
+          {
+            "id": "why-1",
+            "alpha": "Practical, market-focused learning",
+            "other": "Mostly theory-based learning"
+          },
+          {
+            "id": "why-2",
+            "alpha": "Learn to analyze the market yourself",
+            "other": "Depend heavily on tips/signals"
+          },
+          {
+            "id": "why-3",
+            "alpha": "Focus on strategy + risk management",
+            "other": "Often focus mainly on profits"
+          },
+          {
+            "id": "why-4",
+            "alpha": "Guidance from experienced mentors",
+            "other": "Limited personal guidance"
+          },
+          {
+            "id": "why-5",
+            "alpha": "Real-market examples and trade analysis",
+            "other": "Mostly pre-recorded content"
+          },
+          {
+            "id": "why-6",
+            "alpha": "Ongoing learning & community support",
+            "other": "Support may end after the course"
+          },
+          {
+            "id": "why-7",
+            "alpha": "Build your own trading confidence",
+            "other": "Depend on someone else's calls"
+          }
+        ],
+        "differenceTitle": "What Makes Alpha Q7 Different?",
+        "journey": "Learn \u2192 Practice \u2192 Analyze \u2192 Improve",
+        "description": "At Alpha Q7, our goal is not to make you dependent on calls or tips. We help you develop the knowledge, discipline, strategy and risk-management skills needed to make informed trading decisions.",
+        "highlights": [
+          {
+            "id": "highlight-1",
+            "title": "Practical, Market-Focused Learning",
+            "text": "Learn through practical market concepts, analysis and real trading situations."
+          },
+          {
+            "id": "highlight-2",
+            "title": "Learn to Analyze the Market Yourself",
+            "text": "Build the knowledge and confidence to understand charts, market structure and opportunities independently."
+          },
+          {
+            "id": "highlight-3",
+            "title": "Strategy & Risk Management",
+            "text": "Develop disciplined trading strategies while learning responsible risk management and capital protection."
+          },
+          {
+            "id": "highlight-4",
+            "title": "Real-Market Experience & Community Support",
+            "text": "Learn from real-market examples, experienced guidance and an ongoing learning community that helps you grow with confidence."
+          }
+        ],
+        "cta": "Start your trading journey with Alpha Q7 today."
+      }
+    },
+    "courses": [
+      {
+        "id": "forex",
+        "icon": "$",
+        "title": "Forex",
+        "subtitle": "Foreign Exchange Trading",
+        "whatIs": "Forex is the global marketplace where currencies are bought and sold.",
+        "howWorks": "Learn currency pairs, market structure, technical analysis, setups and disciplined risk management.",
+        "benefits": [
+          "Understand currency pairs",
+          "Learn technical analysis",
+          "Build structured setups",
+          "Understand trends",
+          "Learn position sizing",
+          "Study risk management"
+        ],
+        "whoCan": [
+          "Beginners",
+          "Working professionals",
+          "Students",
+          "Anyone interested in currency markets"
+        ]
+      },
+      {
+        "id": "commodities",
+        "icon": "\u25c9",
+        "title": "Commodities",
+        "subtitle": "Gold, Oil, Silver & More",
+        "whatIs": "Commodity trading focuses on financial markets connected to assets such as Gold, Silver and Crude Oil.",
+        "howWorks": "Explore commodity structure, technical analysis, economic catalysts and risk management.",
+        "benefits": [
+          "Understand Gold",
+          "Study Silver",
+          "Understand Crude Oil",
+          "Learn commodity trends",
+          "Study market catalysts",
+          "Build disciplined setups"
+        ],
+        "whoCan": [
+          "Beginners",
+          "Commodity learners",
+          "Professionals",
+          "Students interested in markets"
+        ]
+      },
+      {
+        "id": "crypto",
+        "icon": "\u20bf",
+        "title": "Crypto",
+        "subtitle": "Cryptocurrency Trading",
+        "whatIs": "Crypto trading involves buying and selling digital assets such as Bitcoin and other cryptocurrencies.",
+        "howWorks": "Learn crypto market structure, volatility, technical analysis, trends and disciplined risk management.",
+        "benefits": [
+          "Understand crypto markets",
+          "Learn Bitcoin basics",
+          "Study volatility",
+          "Understand technical setups",
+          "Learn risk management",
+          "Build disciplined habits"
+        ],
+        "whoCan": [
+          "Crypto beginners",
+          "Existing traders",
+          "Fintech students",
+          "Digital-asset learners"
+        ]
+      }
+    ],
+    "learn": [
+      {
+        "id": "learn-1",
+        "title": "Market Structure",
+        "text": "Understand trends, swing highs, swing lows, support and resistance."
+      },
+      {
+        "id": "learn-2",
+        "title": "Technical Analysis",
+        "text": "Study candles, patterns, indicators, momentum and price action."
+      },
+      {
+        "id": "learn-3",
+        "title": "Risk Management",
+        "text": "Learn position sizing, risk-per-trade, stops and target planning."
+      },
+      {
+        "id": "learn-4",
+        "title": "Trading Psychology",
+        "text": "Build discipline, patience, emotional control and consistency."
+      },
+      {
+        "id": "learn-5",
+        "title": "Fundamental Analysis",
+        "text": "Understand economic events and macro factors that can influence markets."
+      },
+      {
+        "id": "learn-6",
+        "title": "Trading Plan",
+        "text": "Create a repeatable process with rules for entries, exits and review."
+      },
+      {
+        "id": "learn-7",
+        "title": "Multi-Timeframe Analysis",
+        "text": "Learn to combine higher and lower timeframes for stronger context."
+      },
+      {
+        "id": "learn-8",
+        "title": "Trade Journaling",
+        "text": "Track decisions, setups, mistakes and performance over time."
+      },
+      {
+        "id": "learn-9",
+        "title": "Market Sessions",
+        "text": "Understand major market sessions, liquidity and timing."
+      }
+    ],
+    "testimonials": [
+      {
+        "id": "testimonial-1",
+        "stars": "\u2605\u2605\u2605\u2605\u2605",
+        "name": "Rahul Verma",
+        "role": "Forex Trader",
+        "text": "Alpha Q7 helped me understand market structure and trading discipline."
+      },
+      {
+        "id": "testimonial-2",
+        "stars": "\u2605\u2605\u2605\u2605\u2605",
+        "name": "Priya Shah",
+        "role": "Commodity Trader",
+        "text": "The risk management sessions were extremely useful for me."
+      },
+      {
+        "id": "testimonial-3",
+        "stars": "\u2605\u2605\u2605\u2605\u2605",
+        "name": "Arjun Mehta",
+        "role": "Crypto Trader",
+        "text": "The course gave me a structured understanding of crypto markets."
+      },
+      {
+        "id": "8b3eb6ce-b3f8-4fcf-aca5-26195781ea04",
+        "stars": "\u2605\u2605\u2605\u2605\u2605",
+        "name": "Sujith",
+        "role": "Forex Trader",
+        "text": "This course as guided me vividly and now i can ace up my trading better than before"
+      }
+    ],
+    "faq": [
+      {
+        "id": "faq-1",
+        "question": "Is the masterclass free?",
+        "answer": "Yes. The introductory Alpha Q7 masterclass is free."
+      },
+      {
+        "id": "faq-2",
+        "question": "Do beginners need experience?",
+        "answer": "No. Beginners can start from the fundamentals."
+      },
+      {
+        "id": "faq-3",
+        "question": "What markets do you teach?",
+        "answer": "Forex, Commodities, Crypto, Technical Analysis, Risk Management and Trading Psychology."
+      },
+      {
+        "id": "faq-4",
+        "question": "Is trading risk-free?",
+        "answer": "No. Financial markets involve risk and returns are never guaranteed."
+      }
+    ]
+  },
+  "footer": {
+    "description": "Alpha Q7 Trading Institute provides structured market education focused on analysis, discipline and responsible risk management.",
+    "logoSrc": "/assets/alpha-q7-logo.png",
+    "logoAlt": "Alpha Q7 Trading Institute",
+    "contactTitle": "Contact",
+    "contact": {
+      "whatsapp": "917353228777",
+      "phone": "+91 73532 28777",
+      "email": "",
+      "address": "22, 1st Floor, 1st Cross, Bannerghatta Rd, Bilekahalli, Bengaluru, Karnataka 560076",
+      "mapUrl": "https://share.google/PfG9yz9BAMR54yJkB"
+    },
+    "columns": [
+      {
+        "id": "explore",
+        "title": "Explore",
+        "links": [
+          {
+            "id": "home",
+            "label": "Home",
+            "url": "#home",
+            "target": "_self"
+          },
+          {
+            "id": "about",
+            "label": "About",
+            "url": "#about",
+            "target": "_self"
+          },
+          {
+            "id": "courses",
+            "label": "Courses",
+            "url": "#courses",
+            "target": "_self"
+          },
+          {
+            "id": "market-analysis",
+            "label": "Market Analysis",
+            "url": "#market-analysis",
+            "target": "_self"
+          }
+        ]
+      },
+      {
+        "id": "resources",
+        "title": "Resources",
+        "links": [
+          {
+            "id": "learn",
+            "label": "What You'll Learn",
+            "url": "#learn",
+            "target": "_self"
+          },
+          {
+            "id": "brochure",
+            "label": "Brochure",
+            "url": "#brochure",
+            "target": "_self"
+          },
+          {
+            "id": "testimonials",
+            "label": "Testimonials",
+            "url": "#testimonials",
+            "target": "_self"
+          },
+          {
+            "id": "faq",
+            "label": "FAQ",
+            "url": "#faq",
+            "target": "_self"
+          }
+        ]
+      }
+    ],
+    "socials": [
+      {
+        "id": "whatsapp",
+        "type": "whatsapp",
+        "label": "WhatsApp",
+        "url": "https://wa.me/917353228777"
+      },
+      {
+        "id": "instagram",
+        "type": "instagram",
+        "label": "Instagram",
+        "url": "https://www.instagram.com/alpha_q7_trading_institute/"
+      }
+    ],
+    "qrImage": "/uploads/1786649486326-82128fc4-93fa-4b72-8d70-8f838c875b88.png",
+    "bottom": {
+      "copyright": "\u00a9 2026 Alpha Q7 Trading Institute.",
+      "disclaimer": "Educational purposes only.",
+      "legalLinks": [
+        {
+          "id": "privacy",
+          "label": "Privacy",
+          "url": "privacy.html",
+          "target": "_self"
+        },
+        {
+          "id": "terms",
+          "label": "Terms",
+          "url": "terms.html",
+          "target": "_self"
+        },
+        {
+          "id": "risk",
+          "label": "Risk & Course Policy",
+          "url": "risk-refund.html",
+          "target": "_self"
+        }
+      ]
+    }
+  },
+  "leads": [],
+  "customSections": [
+    {
+      "id": "custom-1",
+      "title": "Why Choose Alpha Q7",
+      "description": "Discover what makes our trading education unique",
+      "backgroundColor": "#101010",
+      "textColor": "#ffffff",
+      "items": [
+        {
+          "id": "item-1",
+          "heading": "Expert Guidance",
+          "content": "Learn from experienced traders"
+        },
+        {
+          "id": "item-2",
+          "heading": "Practical Skills",
+          "content": "Real-world trading strategies"
+        },
+        {
+          "id": "item-3",
+          "heading": "Risk Management",
+          "content": "Protect your capital always"
+        },
+        {
+          "id": "item-4",
+          "heading": "24/7 Support",
+          "content": "Always here to help you"
+        }
+      ]
+    }
+  ],
+  "revision": 0,
+  "leadActivity": [],
+  "auditLogs": []
+}
