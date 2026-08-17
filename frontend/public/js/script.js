@@ -1,690 +1,398 @@
 "use strict";
-
-/* =========================================================
-   ALPHA Q7 TRADING INSTITUTE
-   MAIN WEBSITE JAVASCRIPT
-========================================================= */
-
-
-/* =========================================================
-   STORAGE KEYS
-========================================================= */
-
 const SITE_KEY =
     "alpha_q7_site";
-
 const COURSES_KEY =
     "alpha_q7_courses";
-
 const LEARN_KEY =
     "alpha_q7_learn";
-
 const TESTIMONIALS_KEY =
     "alpha_q7_testimonials";
-
 const FAQ_KEY =
     "alpha_q7_faq";
-
-const LEADS_KEY =
-    "alpha_q7_leads";
-
-
-/* =========================================================
-   WHATSAPP
-========================================================= */
-
 const DEFAULT_WHATSAPP =
     "917353228777";
-
-
-/* =========================================================
-   LIVE SYNC
-========================================================= */
-
+const GOOGLE_SHEETS_WEBHOOK =
+    "https://script.google.com/macros/s/AKfycbweibyRe4amY93viq1rTbqSCowp5k0Eeb5lBdMjQVvQ5XLsv1UcMeah1h3MiHLuofrq/exec";
+async function submitLeadToGoogleSheet(lead) {
+    if (!GOOGLE_SHEETS_WEBHOOK || GOOGLE_SHEETS_WEBHOOK.includes("PASTE_YOUR")) {
+        throw new Error("Google Sheets webhook is not configured yet.");
+    }
+    await fetch(GOOGLE_SHEETS_WEBHOOK, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(lead)
+    });
+    return lead;
+}
 const SYNC_KEYS = [
-
     SITE_KEY,
-
     COURSES_KEY,
-
     LEARN_KEY,
-
     TESTIMONIALS_KEY,
-
     FAQ_KEY,
-
-    LEADS_KEY,
-
     "alphaQ7FooterSettings"
-
 ];
-
-
 const alphaQ7Channel =
     "BroadcastChannel" in window
         ? new BroadcastChannel(
             "alpha-q7-live-sync"
         )
         : null;
-
-
-/* =========================================================
-   DOM HELPERS
-========================================================= */
-
 function $(selector) {
-
     return document.querySelector(
         selector
     );
-
 }
-
-
 function $$(selector) {
-
     return [
         ...document.querySelectorAll(
             selector
         )
     ];
-
 }
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
 function escapeHtml(value) {
-
     return String(
         value ?? ""
     )
-
     .replace(
         /&/g,
         "&amp;"
     )
-
     .replace(
         /</g,
         "&lt;"
     )
-
     .replace(
         />/g,
         "&gt;"
     )
-
     .replace(
         /"/g,
         "&quot;"
     )
-
     .replace(
         /'/g,
         "&#039;"
     );
-
 }
-
-
-/* =========================================================
-   LOCAL STORAGE
-========================================================= */
-
 function loadJSON(
     key,
     fallback
 ) {
-
     try {
-
         const value =
             localStorage.getItem(
                 key
             );
-
         if (!value) {
-
             localStorage.setItem(
                 key,
                 JSON.stringify(
                     fallback
                 )
             );
-
             return fallback;
-
         }
-
         return JSON.parse(
             value
         );
-
     } catch (error) {
-
         console.error(
             "Alpha Q7 storage error:",
             error
         );
-
         return fallback;
-
     }
-
 }
-
-
 function saveJSON(
     key,
     value
 ) {
-
     try {
-
         localStorage.setItem(
             key,
             JSON.stringify(
                 value
             )
         );
-
         broadcastUpdate(
             key
         );
-
     } catch (error) {
-
         console.error(
             "Alpha Q7 save error:",
             error
         );
-
     }
-
 }
-
-
 function broadcastUpdate(key) {
-
     if (!alphaQ7Channel) {
-
         return;
-
     }
-
     alphaQ7Channel.postMessage({
-
         type:
             "ALPHA_Q7_DATA_UPDATED",
-
         key:
             key,
-
         time:
             Date.now()
-
     });
-
 }
-
-
-/* =========================================================
-   DEFAULT SITE DATA
-========================================================= */
-
 const DEFAULT_SITE = {
-
     heroDescription:
         "Learn Forex, Commodities and Crypto Trading through structured education, practical market analysis and disciplined risk management.",
-
     aboutDescription:
         "Alpha Q7 focuses on practical market education, technical analysis, risk management and trading psychology.",
-
     whatsapp:
         DEFAULT_WHATSAPP,
-
     phoneDisplay:
         "+91 73532 28777",
-
     address:
         "22, 1st Floor, 1st Cross, Bannerghatta Rd, Bilekahalli, Bengaluru, Karnataka 560076",
-
     students:
         "10,000+",
-
     mentors:
         "50+",
-
     hours:
         "500+",
-
     satisfaction:
         "95%"
-
 };
-
-
-/* =========================================================
-   DEFAULT COURSES
-========================================================= */
-
 const DEFAULT_COURSES = [
-
     {
-
         id:
             "forex",
-
         icon:
             "$",
-
         title:
             "Forex",
-
         subtitle:
             "Foreign Exchange Trading",
-
         whatIs:
             "Forex is the global marketplace where currencies are bought and sold.",
-
         howWorks:
             "Learn currency pairs, market structure, technical analysis, trading setups and disciplined risk management.",
-
         benefits: [
-
             "Understand currency pairs",
-
             "Learn technical analysis",
-
             "Build structured setups",
-
             "Understand market trends",
-
             "Learn position sizing",
-
             "Study risk management"
-
         ],
-
         whoCan: [
-
             "Beginners",
-
             "Working professionals",
-
             "Students",
-
             "Anyone interested in currency markets"
-
         ]
-
     },
-
-
     {
-
         id:
             "commodities",
-
         icon:
             "◉",
-
         title:
             "Commodities",
-
         subtitle:
             "Gold, Oil, Silver & More",
-
         whatIs:
             "Commodity trading focuses on markets connected to assets such as Gold, Silver and Crude Oil.",
-
         howWorks:
             "Learn commodity structure, technical analysis, economic catalysts and risk management.",
-
         benefits: [
-
             "Understand Gold",
-
             "Study Silver",
-
             "Understand Crude Oil",
-
             "Learn commodity trends",
-
             "Study market catalysts",
-
             "Build disciplined setups"
-
         ],
-
         whoCan: [
-
             "Beginners",
-
             "Commodity learners",
-
             "Professionals",
-
             "Students interested in markets"
-
         ]
-
     },
-
-
     {
-
         id:
             "crypto",
-
         icon:
             "₿",
-
         title:
             "Crypto",
-
         subtitle:
             "Cryptocurrency Trading",
-
         whatIs:
             "Crypto trading involves buying and selling digital assets such as Bitcoin and other cryptocurrencies.",
-
         howWorks:
             "Learn crypto market structure, volatility, technical analysis, trends and disciplined risk management.",
-
         benefits: [
-
             "Understand crypto markets",
-
             "Learn Bitcoin basics",
-
             "Study volatility",
-
             "Understand technical setups",
-
             "Learn risk management",
-
             "Build disciplined habits"
-
         ],
-
         whoCan: [
-
             "Crypto beginners",
-
             "Existing traders",
-
             "Fintech students",
-
             "Digital asset learners"
-
         ]
-
     }
-
 ];
-
-
-/* =========================================================
-   DEFAULT LEARNING SUBJECTS
-========================================================= */
-
 const DEFAULT_LEARN = [
-
     {
-
         id:
             "learn-1",
-
         title:
             "Market Structure",
-
         text:
             "Understand trends, swing highs, swing lows, support and resistance."
-
     },
-
     {
-
         id:
             "learn-2",
-
         title:
             "Technical Analysis",
-
         text:
             "Study candles, patterns, indicators, momentum and price action."
-
     },
-
     {
-
         id:
             "learn-3",
-
         title:
             "Risk Management",
-
         text:
             "Learn position sizing, risk per trade, stops and target planning."
-
     },
-
     {
-
         id:
             "learn-4",
-
         title:
             "Trading Psychology",
-
         text:
             "Build discipline, patience, emotional control and consistency."
-
     },
-
     {
-
         id:
             "learn-5",
-
         title:
             "Fundamental Analysis",
-
         text:
             "Understand economic events and macro factors that can influence markets."
-
     },
-
     {
-
         id:
             "learn-6",
-
         title:
             "Trading Plan",
-
         text:
             "Create a repeatable process with rules for entries, exits and review."
-
     },
-
     {
-
         id:
             "learn-7",
-
         title:
             "Multi-Timeframe Analysis",
-
         text:
             "Learn to combine higher and lower timeframes for stronger market context."
-
     },
-
     {
-
         id:
             "learn-8",
-
         title:
             "Trade Journaling",
-
         text:
             "Track decisions, setups, mistakes and performance over time."
-
     },
-
     {
-
         id:
             "learn-9",
-
         title:
             "Market Sessions",
-
         text:
             "Understand major market sessions, liquidity and market timing."
-
     }
-
 ];
-
-
-/* =========================================================
-   DEFAULT TESTIMONIALS
-========================================================= */
-
 const DEFAULT_TESTIMONIALS = [
-
     {
-
         id:
             "testimonial-1",
-
         stars:
             "★★★★★",
-
         text:
             "Alpha Q7 helped me understand market structure and trading discipline.",
-
         name:
             "Rahul Verma",
-
         role:
             "Forex Trader"
-
     },
-
     {
-
         id:
             "testimonial-2",
-
         stars:
             "★★★★★",
-
         text:
             "The risk management sessions were extremely useful for me.",
-
         name:
             "Priya Shah",
-
         role:
             "Commodity Trader"
-
     },
-
     {
-
         id:
             "testimonial-3",
-
         stars:
             "★★★★★",
-
         text:
             "The course gave me a structured understanding of crypto markets.",
-
         name:
             "Arjun Mehta",
-
         role:
             "Crypto Trader"
-
     }
-
 ];
-
-
-/* =========================================================
-   DEFAULT FAQ
-========================================================= */
-
 const DEFAULT_FAQ = [
-
     {
-
         id:
             "faq-1",
-
         question:
             "Is the masterclass free?",
-
         answer:
             "Yes. The introductory Alpha Q7 masterclass is free."
-
     },
-
     {
-
         id:
             "faq-2",
-
         question:
             "Do beginners need experience?",
-
         answer:
             "No. Beginners can start from the fundamentals."
-
     },
-
     {
-
         id:
             "faq-3",
-
         question:
             "What markets do you teach?",
-
         answer:
             "Forex, Commodities, Crypto, Technical Analysis, Risk Management and Trading Psychology."
-
     },
-
     {
-
         id:
             "faq-4",
-
         question:
             "Is trading risk-free?",
-
         answer:
             "No. Financial markets involve risk and returns are never guaranteed."
-
     }
-
 ];
-
-
-/* =========================================================
-   DEFAULT WHY ALPHA Q7
-========================================================= */
-
 const DEFAULT_WHY_ALPHA = {
     eyebrow: "WHY ALPHA Q7",
     title: "Why You Should Choose Alpha Q7",
@@ -699,13 +407,7 @@ const DEFAULT_WHY_ALPHA = {
     ],
     cta: ""
 };
-
-/* =========================================================
-   GET DATA
-========================================================= */
-
 let PUBLIC_CONTENT = null;
-
 async function fetchPublicContent() {
     try {
         const response = await fetch(
@@ -715,21 +417,17 @@ async function fetchPublicContent() {
                 cache: "no-store"
             }
         );
-
         if (!response.ok) {
             throw new Error("Website content API unavailable");
         }
-
         PUBLIC_CONTENT =
             await response.json();
-
         return PUBLIC_CONTENT;
     } catch (error) {
         console.warn(
             "Using local website content fallback:",
             error
         );
-
         // Keep the public site fully renderable even when the CMS API is
         // temporarily unavailable. Admin persistence still uses the API.
         PUBLIC_CONTENT = {
@@ -742,11 +440,9 @@ async function fetchPublicContent() {
             testimonials: loadJSON(TESTIMONIALS_KEY, DEFAULT_TESTIMONIALS),
             faq: loadJSON(FAQ_KEY, DEFAULT_FAQ)
         };
-
         return PUBLIC_CONTENT;
     }
 }
-
 function getNestedValue(
     object,
     path
@@ -759,12 +455,10 @@ function getNestedValue(
             object
         );
 }
-
 function renderEditableContent() {
     if (!PUBLIC_CONTENT) {
         return;
     }
-
     document
         .querySelectorAll(
             "[data-content]"
@@ -776,14 +470,12 @@ function renderEditableContent() {
                         PUBLIC_CONTENT.site,
                         element.dataset.content
                     );
-
                 if (
                     value === undefined ||
                     value === null
                 ) {
                     return;
                 }
-
                 if (
                     element.tagName === "INPUT" ||
                     element.tagName === "TEXTAREA"
@@ -796,464 +488,291 @@ function renderEditableContent() {
                 }
             }
         );
-
     renderAboutCards();
     renderAnalysisCards();
     renderWhyAlpha();
 }
-
 function renderWhyAlpha() {
     const container = $("#whyAlphaContainer");
     const section = PUBLIC_CONTENT?.site?.whyAlpha;
-
     if (!container || !section) return;
-
     container.replaceChildren();
-
     const heading = document.createElement("div");
     heading.className = "why-alpha-heading";
-
     const eyebrow = document.createElement("span");
     eyebrow.className = "why-alpha-eyebrow";
     eyebrow.textContent = section.eyebrow || "WHY ALPHA Q7";
-
     const title = document.createElement("h2");
     title.textContent = section.title || "Why You Should Choose Alpha Q7";
-
     heading.append(eyebrow, title);
-
     const box = document.createElement("div");
     box.className = "why-alpha-box";
-
     const journey = document.createElement("div");
     journey.className = "why-alpha-journey";
     journey.textContent = section.journey || "Learn → Practice → Analyze → Improve";
-
     const description = document.createElement("p");
     description.className = "why-alpha-description";
     description.textContent = section.description || "At Alpha Q7, our goal is to help you develop the knowledge, discipline, strategy and risk-management skills needed to make informed trading decisions.";
-
     box.append(journey, description);
-
     const points = Array.isArray(section.highlights) ? section.highlights : [];
-
     points.forEach((point, index) => {
         const item = document.createElement("article");
         item.className = "why-alpha-point";
-
         const titleEl = document.createElement("h4");
         titleEl.textContent = point.title || point.text || `Alpha Q7 Advantage ${index + 1}`;
-
         const textEl = document.createElement("p");
         textEl.textContent = point.text || "";
-
         item.append(titleEl, textEl);
         box.appendChild(item);
     });
-
     if (section.cta) {
         const cta = document.createElement("p");
         cta.className = "why-alpha-cta";
         cta.textContent = section.cta;
         box.appendChild(cta);
     }
-
     container.append(heading, box);
 }
-
 function renderAboutCards() {
     const container =
         $("#aboutCards");
-
     const cards =
         PUBLIC_CONTENT?.site?.about?.cards;
-
     if (!container || !Array.isArray(cards)) {
         return;
     }
-
     container.innerHTML = "";
-
     cards.forEach(
         card => {
             const article =
                 document.createElement("article");
-
             article.className =
                 "about-card";
-
             article.innerHTML = `
                 <span class="about-number">
                     ${escapeHtml(card.number)}
                 </span>
-
                 <h3>
                     ${escapeHtml(card.title)}
                 </h3>
-
                 <p>
                     ${escapeHtml(card.text)}
                 </p>
             `;
-
             container.appendChild(article);
         }
     );
 }
-
 function renderAnalysisCards() {
     const container =
         $("#analysisCards");
-
     const cards =
         PUBLIC_CONTENT?.site?.analysis?.cards;
-
     if (!container || !Array.isArray(cards)) {
         return;
     }
-
     container.innerHTML = "";
-
     cards.forEach(
         card => {
             const article =
                 document.createElement("div");
-
             article.className =
                 "analysis-card";
-
             article.innerHTML = `
                 <span>
                     ${escapeHtml(card.number)}
                 </span>
-
                 <h3>
                     ${escapeHtml(card.title)}
                 </h3>
-
                 <p>
                     ${escapeHtml(card.text)}
                 </p>
             `;
-
             container.appendChild(article);
         }
     );
 }
-
 function getSite() {
     if (PUBLIC_CONTENT?.site) {
         return PUBLIC_CONTENT.site;
     }
-
     return loadJSON(
         SITE_KEY,
         DEFAULT_SITE
     );
 }
-
-
 function getCourses() {
     if (PUBLIC_CONTENT?.courses) {
         return PUBLIC_CONTENT.courses;
     }
-
     return loadJSON(
         COURSES_KEY,
         DEFAULT_COURSES
     );
 }
-
-
 function getLearn() {
     if (PUBLIC_CONTENT?.learn) {
         return PUBLIC_CONTENT.learn;
     }
-
     return loadJSON(
         LEARN_KEY,
         DEFAULT_LEARN
     );
 }
-
-
 function getTestimonials() {
     if (PUBLIC_CONTENT?.testimonials) {
         return PUBLIC_CONTENT.testimonials;
     }
-
     return loadJSON(
         TESTIMONIALS_KEY,
         DEFAULT_TESTIMONIALS
     );
 }
-
-
 function getFAQ() {
     if (PUBLIC_CONTENT?.faq) {
         return PUBLIC_CONTENT.faq;
     }
-
     return loadJSON(
         FAQ_KEY,
         DEFAULT_FAQ
     );
 }
-
-
-function getLeads() {
-
-    return loadJSON(
-        LEADS_KEY,
-        []
-    );
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
 function toast(message) {
-
     const element =
         $("#toast");
-
     if (!element) {
-
         alert(message);
-
         return;
-
     }
-
     element.textContent =
         message;
-
     element.classList.add(
         "show"
     );
-
     clearTimeout(
         window.alphaQ7ToastTimer
     );
-
     window.alphaQ7ToastTimer =
         setTimeout(
             () => {
-
                 element.classList.remove(
                     "show"
                 );
-
             },
             3000
         );
-
 }
-
-
-/* =========================================================
-   RENDER WEBSITE SETTINGS
-========================================================= */
-
 function renderSite() {
-
     renderEditableContent();
-
     // ENROLL NOW is a fixed public-facing label. Do not let legacy
     // CMS values such as "FREE MASTERCLASS" overwrite it after load.
     const enrollmentTitle = document.querySelector("#masterclass .masterclass-heading h2");
     const enrollmentSubtitle = document.querySelector("#masterclass .masterclass-heading p");
     if (enrollmentTitle) enrollmentTitle.textContent = "ENROLL NOW";
     if (enrollmentSubtitle) enrollmentSubtitle.textContent = "Start your trading journey with Alpha Q7.";
-
     const site =
         getSite();
-
-
     const hero =
         $("#heroDescription");
-
     if (hero) {
-
         hero.textContent = site.hero?.description ?? site.heroDescription ?? "";
-
     }
-
-
     const about =
         $("#aboutDescription");
-
     if (about) {
-
         about.textContent = site.about?.description ?? site.aboutDescription ?? "";
-
     }
-
-
     const publicWhatsapp =
         $("#publicWhatsapp");
-
     if (publicWhatsapp) {
-
         const contact = site.footer?.contact || site;
         const whatsappNumber = contact.whatsapp || site.whatsapp || DEFAULT_WHATSAPP;
         publicWhatsapp.textContent = contact.phone || site.phoneDisplay || `+${whatsappNumber}`;
-
         publicWhatsapp.href =
             `https://wa.me/${whatsappNumber}`;
-
     }
-
-
     const contactWhatsapp =
         $("#contactWhatsappButton");
-
     if (contactWhatsapp) {
-
         contactWhatsapp.href =
             `https://wa.me/${site.footer?.contact?.whatsapp || site.whatsapp || DEFAULT_WHATSAPP}`;
-
     }
-
-
     const publicAddress =
         $("#publicAddress");
-
     if (publicAddress) {
-
         publicAddress.textContent =
             site.footer?.contact?.address || site.address || "";
-
     }
-
-
     const statStudents =
         $("#statStudents");
-
     if (statStudents) {
         statStudents.textContent = site.stats?.students?.value ?? site.students;
         const label = statStudents.parentElement?.querySelector("span");
         if (label) label.textContent = site.stats?.students?.label ?? label.textContent;
-
     }
-
-
     const statMentors =
         $("#statMentors");
-
     if (statMentors) {
         statMentors.textContent = site.stats?.mentors?.value ?? site.mentors;
         const label = statMentors.parentElement?.querySelector("span");
         if (label) label.textContent = site.stats?.mentors?.label ?? label.textContent;
-
     }
-
-
     const statHours =
         $("#statHours");
-
     if (statHours) {
         statHours.textContent = site.stats?.hours?.value ?? site.hours;
         const label = statHours.parentElement?.querySelector("span");
         if (label) label.textContent = site.stats?.hours?.label ?? label.textContent;
-
     }
-
-
     const statSatisfaction =
         $("#statSatisfaction");
-
     if (statSatisfaction) {
         statSatisfaction.textContent = site.stats?.satisfaction?.value ?? site.satisfaction;
         const label = statSatisfaction.parentElement?.querySelector("span");
         if (label) label.textContent = site.stats?.satisfaction?.label ?? label.textContent;
-
     }
-
-
     renderCourses();
-
     renderLearn();
-
     renderTestimonials();
-
     renderFAQ();
-
 }
-
-
-/* =========================================================
-   RENDER COURSES
-========================================================= */
-
 function renderCourses() {
-
     const container =
         $("#courseAccordion");
-
     if (!container) {
-
         return;
-
     }
-
-
     container.innerHTML =
         "";
-
-
     getCourses()
         .forEach(
             course => {
-
                 const card =
                     document.createElement(
                         "article"
                     );
-
-
                 card.className =
                     "course-card";
-
-
                 card.innerHTML = `
-
                     <div class="course-summary">
-
                         <div class="course-icon">
-
                             ${escapeHtml(
                                 course.icon
                             )}
-
                         </div>
-
-
                         <div>
-
                             <h3 class="course-title">
-
                                 ${escapeHtml(
                                     course.title
                                 )}
-
                             </h3>
-
-
                             <p class="course-subtitle">
-
                                 ${escapeHtml(
                                     course.subtitle
                                 )}
-
                             </p>
-
                         </div>
-
-
                         <button
                             type="button"
                             class="course-toggle"
@@ -1261,55 +780,37 @@ function renderCourses() {
                         >
                             ↓
                         </button>
-
                     </div>
-
-
                     <div class="course-details">
-
                         <div class="course-details-inner">
-
                             <div class="course-detail-block">
-
                                 <h4>
                                     WHAT IS
                                     ${escapeHtml(
                                         course.title
                                     ).toUpperCase()}?
                                 </h4>
-
                                 <p>
                                     ${escapeHtml(
                                         course.whatIs
                                     )}
                                 </p>
-
                             </div>
-
-
                             <div class="course-detail-block">
-
                                 <h4>
                                     WHAT YOU WILL LEARN?
                                 </h4>
-
                                 <p>
                                     ${escapeHtml(
                                         course.howWorks
                                     )}
                                 </p>
-
                             </div>
-
-
                             <div class="course-detail-block">
-
                                 <h4>
                                     WHY IT'S BENEFICIAL
                                 </h4>
-
                                 <div class="course-benefits-grid">
-
                                     ${
                                         (
                                             course.benefits ||
@@ -1317,33 +818,22 @@ function renderCourses() {
                                         )
                                         .map(
                                             benefit => `
-
                                                 <div class="course-benefit">
-
                                                     ${escapeHtml(
                                                         benefit
                                                     )}
-
                                                 </div>
-
                                             `
                                         )
                                         .join("")
                                     }
-
                                 </div>
-
                             </div>
-
-
                             <div class="course-detail-block">
-
                                 <h4>
                                     WHO CAN DO IT?
                                 </h4>
-
                                 <p>
-
                                     ${
                                         (
                                             course.whoCan ||
@@ -1359,280 +849,168 @@ function renderCourses() {
                                             " • "
                                         )
                                     }
-
                                 </p>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 `;
-
-
                 container.appendChild(
                     card
                 );
-
-
                 const summary =
                     card.querySelector(
                         ".course-summary"
                     );
-
-
                 summary?.addEventListener(
                     "click",
                     () => {
-
                         const alreadyOpen =
                             card.classList.contains(
                                 "open"
                             );
-
-
                         $$(".course-card")
                             .forEach(
                                 item => {
-
                                     item.classList.remove(
                                         "open"
                                     );
-
                                 }
                             );
-
-
                         if (
                             !alreadyOpen
                         ) {
-
                             card.classList.add(
                                 "open"
                             );
-
                         }
-
                     }
                 );
-
             }
         );
-
 }
-
-
-/* =========================================================
-   RENDER WHAT YOU'LL LEARN
-========================================================= */
-
 function renderLearn() {
-
     const container =
         $("#learnGrid");
-
     if (!container) {
-
         return;
-
     }
-
-
     container.innerHTML =
         "";
-
-
     getLearn()
         .forEach(
             item => {
-
                 const element =
                     document.createElement(
                         "div"
                     );
-
-
                 element.className =
                     "learn-item";
-
-
                 element.innerHTML = `
-
                     <span>
                         ✓
                     </span>
-
                     <div>
-
                         <strong>
                             ${escapeHtml(
                                 item.title
                             )}
                         </strong>
-
                         <p>
                             ${escapeHtml(
                                 item.text
                             )}
                         </p>
-
                     </div>
-
                 `;
-
-
                 container.appendChild(
                     element
                 );
-
             }
         );
-
 }
-
-
-/* =========================================================
-   RENDER TESTIMONIALS
-========================================================= */
-
 function renderTestimonials() {
-
     const container =
         $("#testimonialGrid");
-
     if (!container) {
-
         return;
-
     }
-
-
     container.innerHTML =
         "";
-
-
     getTestimonials()
         .forEach(
             item => {
-
                 const element =
                     document.createElement(
                         "article"
                     );
-
-
                 element.className =
                     "testimonial-card";
-
-
                 element.innerHTML = `
-
                     <div class="stars">
                         ${escapeHtml(
                             item.stars
                         )}
                     </div>
-
                     <p>
                         ${escapeHtml(
                             item.text
                         )}
                     </p>
-
                     <strong>
                         ${escapeHtml(
                             item.name
                         )}
                     </strong>
-
                     <small>
                         ${escapeHtml(
                             item.role
                         )}
                     </small>
-
                 `;
-
-
                 container.appendChild(
                     element
                 );
-
             }
         );
-
 }
-
-
-/* =========================================================
-   RENDER FAQ
-========================================================= */
-
 function renderFAQ() {
-
     const container =
         $("#faqList");
-
     if (!container) {
-
         return;
-
     }
-
-
     container.innerHTML =
         "";
-
-
     getFAQ()
         .forEach(
             item => {
-
                 const element =
                     document.createElement(
                         "details"
                     );
-
-
                 element.innerHTML = `
-
                     <summary>
                         ${escapeHtml(
                             item.question
                         )}
                     </summary>
-
                     <p>
                         ${escapeHtml(
                             item.answer
                         )}
                     </p>
-
                 `;
-
-
                 container.appendChild(
                     element
                 );
-
             }
         );
-
 }
-
-
-/* =========================================================
-   MAIN ENQUIRY FORM
-========================================================= */
-
 const leadForm =
     $("#leadForm");
-
 function normalizeMobile(value) {
     return String(value || "").replace(/\D/g, "").slice(-10);
 }
-
 function validateLeadPayload(lead) {
     if (lead.fullName.length < 2) return "Please enter your full name.";
     if (!/^\d{10}$/.test(lead.mobile)) return "Please enter a valid 10-digit mobile number.";
@@ -1640,7 +1018,6 @@ function validateLeadPayload(lead) {
     if (!lead.experience) return "Please select your experience level.";
     return "";
 }
-
 function wireMobileField(selector) {
     const input = $(selector);
     if (!input || input.dataset.mobileWired) return;
@@ -1650,18 +1027,13 @@ function wireMobileField(selector) {
         if (input.value !== digits) input.value = digits;
     });
 }
-
 wireMobileField("#mobile");
 wireMobileField("#brochureMobile");
-
 leadForm?.addEventListener(
     "submit",
     async event => {
-
         event.preventDefault();
-
         const formData = new FormData(leadForm);
-
         const lead = {
             id: `lead-${Date.now()}`,
             fullName: String(formData.get("fullName") || "").trim(),
@@ -1672,40 +1044,19 @@ leadForm?.addEventListener(
             status: "New",
             createdAt: new Date().toISOString()
         };
-
         const validationError = validateLeadPayload(lead);
         if (validationError) {
             toast(validationError);
             return;
         }
-
         const submitButton = leadForm.querySelector('button[type="submit"]');
         const previousLabel = submitButton?.textContent?.trim() || "RESERVE MY SEAT";
-
         if (submitButton) {
             submitButton.disabled = true;
             submitButton.textContent = "SAVING…";
         }
-
         try {
-            const response = await fetch("/api/leads", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                cache: "no-store",
-                body: JSON.stringify(lead)
-            });
-
-            const result = await response.json().catch(() => ({}));
-
-            if (!response.ok) {
-                throw new Error(result.message || `Unable to save your registration (${response.status}).`);
-            }
-
-            const savedLead = result?.id ? result : lead;
-
+            const savedLead = await submitLeadToGoogleSheet(lead);
             const message = [
                 "Hello Alpha Q7 Trading Institute,",
                 "",
@@ -1718,31 +1069,24 @@ leadForm?.addEventListener(
                 "",
                 "I would like to know more about the program."
             ].join("\n");
-
             const whatsappURL =
                 `https://wa.me/${getSite().footer?.contact?.whatsapp || getSite().whatsapp || DEFAULT_WHATSAPP}` +
                 `?text=${encodeURIComponent(message)}`;
-
             const successWhatsapp = $("#successWhatsapp");
             if (successWhatsapp) successWhatsapp.href = whatsappURL;
-
             leadForm.hidden = true;
-
             const formSuccess = $("#formSuccess");
             if (formSuccess) formSuccess.hidden = false;
-
             // Opening WhatsApp is optional; the saved lead must never depend on it.
             try {
                 window.open(whatsappURL, "_blank", "noopener,noreferrer");
             } catch {}
-
             toast("Registration saved successfully.");
-
         } catch (error) {
             const offline = /failed to fetch|networkerror|load failed/i.test(String(error?.message || ""));
             toast(
                 offline
-                    ? "Unable to reach the server. Start the local backend (npm run dev) and try again."
+                    ? "Unable to reach Google Sheets. Check your internet connection and try again."
                     : (error.message || "Unable to save your registration. Please try again.")
             );
         } finally {
@@ -1753,83 +1097,53 @@ leadForm?.addEventListener(
         }
     }
 );
-
-/* =========================================================
-   RESET MAIN FORM
-========================================================= */
-
 $("#resetForm")
     ?.addEventListener(
         "click",
         () => {
-
             if (leadForm) {
-
                 leadForm.reset();
-
                 leadForm.hidden =
                     false;
-
             }
-
-
             const formSuccess =
                 $("#formSuccess");
-
-
             if (formSuccess) {
-
                 formSuccess.hidden =
                     true;
-
             }
-
         }
     );
-
-
-/* =========================================================
-   BROCHURE ENQUIRY
-========================================================= */
-
 const brochureModal = $("#brochureModal");
 const brochureEnquiryForm = $("#brochureEnquiryForm");
 const brochureSuccess = $("#brochureSuccess");
 const brochureDownloadLink = $("#brochureDownloadLink");
 const brochureWhatsapp = $("#brochureWhatsapp");
-
 const BROCHURE_URL = "/assets/alpha-q7-brochure.pdf";
-
 function openBrochureModal() {
     if (!brochureModal) return;
     brochureModal.hidden = false;
     document.body.classList.add("modal-open");
     window.setTimeout(() => $("#brochureName")?.focus(), 50);
 }
-
 function closeBrochureModal() {
     if (!brochureModal) return;
     brochureModal.hidden = true;
     document.body.classList.remove("modal-open");
 }
-
 $("#downloadBrochure")?.addEventListener("click", event => {
     event.preventDefault();
     openBrochureModal();
 });
-
 $("#closeBrochureModal")?.addEventListener("click", closeBrochureModal);
 $("#brochureModalOverlay")?.addEventListener("click", closeBrochureModal);
-
 document.addEventListener("keydown", event => {
     if (event.key === "Escape" && brochureModal && !brochureModal.hidden) {
         closeBrochureModal();
     }
 });
-
 brochureEnquiryForm?.addEventListener("submit", async event => {
     event.preventDefault();
-
     const data = new FormData(brochureEnquiryForm);
     const lead = {
         fullName: String(data.get("fullName") || "").trim(),
@@ -1840,40 +1154,19 @@ brochureEnquiryForm?.addEventListener("submit", async event => {
         status: "New",
         createdAt: new Date().toISOString()
     };
-
     const validationError = validateLeadPayload(lead);
     if (validationError) {
         toast(validationError);
         return;
     }
-
     const submitButton = brochureEnquiryForm.querySelector('button[type="submit"]');
     const previousLabel = submitButton?.textContent?.trim() || "GET BROCHURE";
-
     if (submitButton) {
         submitButton.disabled = true;
         submitButton.textContent = "SAVING…";
     }
-
     try {
-        const response = await fetch("/api/leads", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            cache: "no-store",
-            body: JSON.stringify(lead)
-        });
-
-        const result = await response.json().catch(() => ({}));
-
-        if (!response.ok) {
-            throw new Error(result.message || `Unable to save your enquiry (${response.status}).`);
-        }
-
-        const savedLead = result?.id ? result : lead;
-
+        const savedLead = await submitLeadToGoogleSheet(lead);
         const site = getSite();
         const message = [
             "Hello Alpha Q7 Trading Institute,",
@@ -1885,21 +1178,16 @@ brochureEnquiryForm?.addEventListener("submit", async event => {
             `Email: ${savedLead.email || "Not provided"}`,
             `Experience: ${savedLead.experience}`
         ].join("\n");
-
         const whatsappURL =
             `https://wa.me/${site.footer?.contact?.whatsapp || site.whatsapp || DEFAULT_WHATSAPP}` +
             `?text=${encodeURIComponent(message)}`;
-
         if (brochureWhatsapp) brochureWhatsapp.href = whatsappURL;
-
         if (brochureDownloadLink) {
             brochureDownloadLink.href = BROCHURE_URL;
             brochureDownloadLink.download = "Alpha-Q7-Trading-Institute-Brochure.pdf";
         }
-
         brochureEnquiryForm.hidden = true;
         if (brochureSuccess) brochureSuccess.hidden = false;
-
         // Keep the download available as a normal user-initiated link.
         // Also try an automatic download; browsers may block async downloads,
         // in which case the visible button remains fully functional.
@@ -1911,14 +1199,12 @@ brochureEnquiryForm?.addEventListener("submit", async event => {
         document.body.appendChild(download);
         try { download.click(); } catch {}
         download.remove();
-
         toast("Brochure enquiry saved successfully.");
-
     } catch (error) {
         const offline = /failed to fetch|networkerror|load failed/i.test(String(error?.message || ""));
         toast(
             offline
-                ? "Unable to reach the server. Start the local backend (npm run dev) and try again."
+                ? "Unable to reach Google Sheets. Check your internet connection and try again."
                 : (error.message || "Unable to save your enquiry. Please try again.")
         );
     } finally {
@@ -1928,30 +1214,20 @@ brochureEnquiryForm?.addEventListener("submit", async event => {
         }
     }
 });
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
 const menuToggle =
     $("#menuToggle");
-
 const mainNav =
     $("#mainNav");
-
 function setMobileMenu(open) {
     if (!mainNav || !menuToggle) {
         return;
     }
-
     mainNav.classList.toggle("open", open);
-
     menuToggle.setAttribute(
         "aria-expanded",
         String(open)
     );
 }
-
 menuToggle?.addEventListener(
     "click",
     () => {
@@ -1960,7 +1236,6 @@ menuToggle?.addEventListener(
         );
     }
 );
-
 $$(".main-nav a")
     .forEach(
         link => {
@@ -1970,7 +1245,6 @@ $$(".main-nav a")
             );
         }
     );
-
 document.addEventListener(
     "keydown",
     event => {
@@ -1979,326 +1253,182 @@ document.addEventListener(
         }
     }
 );
-
-
-/* =========================================================
-   BACKGROUND CANDLE GRAPH
-========================================================= */
-
 const backgroundCanvas =
     $("#marketBackground");
-
 const backgroundContext =
     backgroundCanvas
         ? backgroundCanvas.getContext(
             "2d"
         )
         : null;
-
-
 let backgroundWidth =
     window.innerWidth;
-
 let backgroundHeight =
     window.innerHeight;
-
 let backgroundCandles =
     [];
-
 let backgroundOffset =
     0;
-
 let backgroundPreviousTime =
     performance.now();
-
 let backgroundAnimationFrame =
     null;
-
 const backgroundReducedMotion =
     window.matchMedia(
         "(prefers-reduced-motion: reduce)"
     );
-
 let backgroundPaused =
     document.hidden ||
     backgroundReducedMotion.matches;
-
-
 const GREEN_CANDLE =
     "#143A34";
-
 const GREEN_WICK =
     "#2EC38D";
-
 const RED_CANDLE =
     "#3A1E1E";
-
 const RED_WICK =
     "#E15757";
-
-
-/* =========================================================
-   RESIZE BACKGROUND
-========================================================= */
-
 function resizeBackgroundCanvas() {
-
     if (
         !backgroundCanvas ||
         !backgroundContext
     ) {
-
         return;
-
     }
-
-
     const dpr =
         Math.min(
             window.devicePixelRatio ||
             1,
             2
         );
-
-
     backgroundWidth =
         window.innerWidth;
-
-
     backgroundHeight =
         window.innerHeight;
-
-
     backgroundCanvas.width =
         backgroundWidth *
         dpr;
-
-
     backgroundCanvas.height =
         backgroundHeight *
         dpr;
-
-
     backgroundCanvas.style.width =
         `${backgroundWidth}px`;
-
-
     backgroundCanvas.style.height =
         `${backgroundHeight}px`;
-
-
     backgroundContext.setTransform(
-
         dpr,
-
         0,
-
         0,
-
         dpr,
-
         0,
-
         0
-
     );
-
-
     createBackgroundCandles();
-
 }
-
-
-/* =========================================================
-   CREATE BACKGROUND CANDLES
-========================================================= */
-
 function createBackgroundCandles() {
-
     backgroundCandles =
         [];
-
-
     const spacing =
         35;
-
-
     for (
-
         let x = -200;
-
         x <
             backgroundWidth +
             400;
-
         x +=
             spacing
-
     ) {
-
         const bullish =
             Math.random() >
             0.5;
-
-
         backgroundCandles.push({
-
             x:
-
                 x,
-
             base:
-
                 backgroundHeight *
                 (
                     0.45 +
                     Math.random() *
                     0.30
                 ),
-
             height:
-
                 backgroundHeight *
                 (
                     0.05 +
                     Math.random() *
                     0.18
                 ),
-
             targetHeight:
-
                 backgroundHeight *
                 (
                     0.06 +
                     Math.random() *
                     0.24
                 ),
-
             bullish:
-
                 bullish,
-
             targetBullish:
-
                 bullish,
-
             transition:
-
                 0
-
         });
-
     }
-
 }
-
-
-/* =========================================================
-   DRAW BACKGROUND GRID
-========================================================= */
-
 function drawBackgroundGrid() {
-
     if (
         !backgroundContext
     ) {
-
         return;
-
     }
-
-
     backgroundContext.strokeStyle =
         "rgba(255,255,255,0.02)";
-
-
     backgroundContext.lineWidth =
         1;
-
-
     for (
-
         let x =
             -backgroundOffset;
-
         x <
             backgroundWidth +
             100;
-
         x +=
             90
-
     ) {
-
         backgroundContext.beginPath();
-
-
         backgroundContext.moveTo(
             x,
             0
         );
-
-
         backgroundContext.lineTo(
             x,
             backgroundHeight
         );
-
-
         backgroundContext.stroke();
-
     }
-
-
     for (
-
         let y = 60;
-
         y <
             backgroundHeight;
-
         y +=
             90
-
     ) {
-
         backgroundContext.beginPath();
-
-
         backgroundContext.moveTo(
             0,
             y
         );
-
-
         backgroundContext.lineTo(
             backgroundWidth,
             y
         );
-
-
         backgroundContext.stroke();
-
     }
-
 }
-
-
-/* =========================================================
-   DRAW BACKGROUND CANDLES
-========================================================= */
-
 function drawBackgroundCandles() {
-
     if (
         !backgroundContext
     ) {
-
         return;
-
     }
-
-
     const candleWidth =
         Math.max(
             6,
@@ -2308,17 +1438,12 @@ function drawBackgroundCandles() {
                 0.007
             )
         );
-
-
     backgroundCandles
         .forEach(
             candle => {
-
                 const x =
                     candle.x -
                     backgroundOffset;
-
-
                 if (
                     x <
                         -30 ||
@@ -2326,348 +1451,203 @@ function drawBackgroundCandles() {
                         backgroundWidth +
                         30
                 ) {
-
                     return;
-
                 }
-
-
                 candle.height +=
-
                     (
                         candle.targetHeight -
                         candle.height
                     ) *
                     0.025;
-
-
                 if (
                     Math.abs(
                         candle.targetHeight -
                         candle.height
                     ) < 2
                 ) {
-
                     candle.targetHeight =
-
                         backgroundHeight *
                         (
                             0.05 +
                             Math.random() *
                             0.24
                         );
-
                 }
-
-
                 if (
                     Math.random() <
                     0.0018
                 ) {
-
                     candle.targetBullish =
                         !candle.targetBullish;
-
                     candle.transition =
                         0;
-
                 }
-
-
                 if (
                     candle.bullish !==
                     candle.targetBullish
                 ) {
-
                     candle.transition +=
                         0.04;
-
-
                     if (
                         candle.transition >=
                         1
                     ) {
-
                         candle.bullish =
                             candle.targetBullish;
-
                         candle.transition =
                             0;
-
                     }
-
                 }
-
-
                 const top =
                     candle.base -
                     candle.height;
-
-
                 const wickTop =
                     top -
                     15;
-
-
                 const wickBottom =
                     candle.base +
                     15;
-
-
-                /*
-                 * WICK
-                 */
-
                 backgroundContext.strokeStyle =
-
                     candle.bullish
                         ? GREEN_WICK
                         : RED_WICK;
-
-
                 backgroundContext.lineWidth =
                     2;
-
-
                 backgroundContext.beginPath();
-
-
                 backgroundContext.moveTo(
-
                     x +
                     candleWidth / 2,
-
                     wickTop
-
                 );
-
-
                 backgroundContext.lineTo(
-
                     x +
                     candleWidth / 2,
-
                     wickBottom
-
                 );
-
-
                 backgroundContext.stroke();
-
-
-                /*
-                 * BODY
-                 */
-
                 backgroundContext.fillStyle =
-
                     candle.bullish
                         ? GREEN_CANDLE
                         : RED_CANDLE;
-
-
                 backgroundContext.fillRect(
-
                     x,
-
                     top,
-
                     candleWidth,
-
                     candle.height
-
                 );
-
-
-                /*
-                 * EDGE
-                 */
-
                 backgroundContext.fillStyle =
-
                     candle.bullish
                         ? GREEN_WICK
                         : RED_WICK;
-
-
                 backgroundContext.fillRect(
-
                     x,
-
                     top,
-
                     2,
-
                     candle.height
-
                 );
-
             }
         );
-
 }
-
-
-/* =========================================================
-   BACKGROUND ANIMATION
-========================================================= */
-
 function animateBackground(
     timestamp
 ) {
-
     if (
         !backgroundContext
     ) {
-
         return;
-
     }
-
-
     const elapsed =
         Math.min(
             50,
             timestamp -
             backgroundPreviousTime
         );
-
-
     backgroundPreviousTime =
         timestamp;
-
-
     backgroundOffset +=
         elapsed *
         0.045;
-
-
     if (
         backgroundOffset >=
         35
     ) {
-
         backgroundOffset =
             0;
-
-
         backgroundCandles
             .forEach(
                 candle => {
-
                     candle.x -=
                         35;
-
                 }
             );
-
-
         const lastCandle =
             backgroundCandles[
                 backgroundCandles.length - 1
             ];
-
-
         backgroundCandles.push({
-
             x:
                 lastCandle
                     ? lastCandle.x +
                       35
                     : backgroundWidth,
-
             base:
-
                 backgroundHeight *
                 (
                     0.45 +
                     Math.random() *
                     0.30
                 ),
-
             height:
-
                 backgroundHeight *
                 (
                     0.05 +
                     Math.random() *
                     0.18
                 ),
-
             targetHeight:
-
                 backgroundHeight *
                 (
                     0.06 +
                     Math.random() *
                     0.24
                 ),
-
             bullish:
                 Math.random() >
                 0.5,
-
             targetBullish:
                 Math.random() >
                 0.5,
-
             transition:
                 0
-
         });
-
-
         backgroundCandles =
             backgroundCandles.filter(
                 candle =>
                     candle.x >
                     -200
             );
-
     }
-
-
-    /*
-     * WHITE BACKGROUND
-     */
-
     backgroundContext.fillStyle =
         "#0B1220";
-
-
     backgroundContext.fillRect(
-
         0,
-
         0,
-
         backgroundWidth,
-
         backgroundHeight
-
     );
-
-
     drawBackgroundGrid();
-
     drawBackgroundCandles();
-
-
     if (!backgroundPaused) {
         backgroundAnimationFrame =
             requestAnimationFrame(
                 animateBackground
             );
     }
-
 }
-
-
 function updateBackgroundMotionState() {
     backgroundPaused =
         document.hidden ||
         backgroundReducedMotion.matches;
-
     if (backgroundPaused) {
         if (backgroundAnimationFrame) {
             cancelAnimationFrame(
@@ -2678,10 +1658,8 @@ function updateBackgroundMotionState() {
         }
         return;
     }
-
     backgroundPreviousTime =
         performance.now();
-
     if (!backgroundAnimationFrame) {
         backgroundAnimationFrame =
             requestAnimationFrame(
@@ -2689,202 +1667,113 @@ function updateBackgroundMotionState() {
             );
     }
 }
-
 document.addEventListener(
     "visibilitychange",
     updateBackgroundMotionState
 );
-
 if (backgroundReducedMotion.addEventListener) {
     backgroundReducedMotion.addEventListener(
         "change",
         updateBackgroundMotionState
     );
 }
-
-
-/* =========================================================
-   START BACKGROUND
-========================================================= */
-
 function initializeBackground() {
-
     if (
         !backgroundCanvas ||
         !backgroundContext
     ) {
-
         return;
-
     }
-
-
     resizeBackgroundCanvas();
-
-
     window.addEventListener(
         "resize",
         resizeBackgroundCanvas
     );
-
-
     if (!backgroundPaused) {
         backgroundAnimationFrame =
             requestAnimationFrame(
                 animateBackground
             );
     }
-
 }
-
-
-/* =========================================================
-   BACK TO TOP
-========================================================= */
-
 window.addEventListener(
     "scroll",
     () => {
-
         const button =
             $("#backTop");
-
-
         if (!button) {
-
             return;
-
         }
-
-
         button.classList.toggle(
-
             "show",
-
             window.scrollY >
             500
-
         );
-
     }
 );
-
-
 $("#backTop")
     ?.addEventListener(
         "click",
         () => {
-
             window.scrollTo({
-
                 top:
                     0,
-
                 behavior:
                     "smooth"
-
             });
-
         }
     );
-
-
-/* =========================================================
-   ADMIN → WEBSITE SYNC
-========================================================= */
-
 window.addEventListener(
     "storage",
     event => {
-
         if (
             !SYNC_KEYS.includes(
                 event.key
             )
         ) {
-
             return;
-
         }
-
-
         fetchPublicContent()
             .then(() => {
                 renderSite();
                 renderFooter();
             });
-
     }
 );
-
-
 alphaQ7Channel?.addEventListener(
     "message",
     event => {
-
         if (
             event.data?.type !==
             "ALPHA_Q7_DATA_UPDATED"
         ) {
-
             return;
-
         }
-
-
         fetchPublicContent()
             .then(() => {
                 renderSite();
                 refreshFooter();
             });
-
     }
 );
-
-
-/* =========================================================
-   INITIALIZE WEBSITE
-========================================================= */
-
 async function initializeAlphaQ7() {
-
     await fetchPublicContent();
-
     renderSite();
-
     refreshFooter();
-
     initializeBackground();
-
 }
-
-
-/* =========================================================
-   DOM READY
-========================================================= */
-
 if (
     document.readyState ===
     "loading"
 ) {
-
     document.addEventListener(
         "DOMContentLoaded",
         initializeAlphaQ7
     );
-
 } else {
-
     initializeAlphaQ7();
-
 }
-
-/* =========================================================
-   ALPHA Q7 FOOTER MANAGEMENT
-========================================================= */
-
 const FOOTER_STORAGE_KEY = "alphaQ7FooterSettings";
-
 const DEFAULT_FOOTER_SETTINGS = {
     description: "Alpha Q7 Trading Institute provides structured market education focused on analysis, discipline and responsible risk management.",
     logoSrc: "assets/alpha-q7-logo.png",
@@ -2928,24 +1817,15 @@ const DEFAULT_FOOTER_SETTINGS = {
         ]
     }
 };
-
-
-/* =========================================================
-   LOAD FOOTER DATA
-========================================================= */
-
 function getFooterSettings() {
     try {
         const saved = localStorage.getItem(
             FOOTER_STORAGE_KEY
         );
-
         const parsed = saved
             ? JSON.parse(saved)
             : {};
-
         const site = getSite();
-
         const socials = (
             Array.isArray(parsed.socials)
                 ? parsed.socials
@@ -2956,7 +1836,6 @@ function getFooterSettings() {
                 social.url &&
                 social.url !== "https://www.linkedin.com/"
         );
-
         return {
             ...DEFAULT_FOOTER_SETTINGS,
             ...parsed,
@@ -2967,37 +1846,21 @@ function getFooterSettings() {
             "Unable to load footer settings:",
             error
         );
-
         return {
             ...DEFAULT_FOOTER_SETTINGS,
             socials: DEFAULT_FOOTER_SETTINGS.socials
         };
     }
 }
-
-
-/* =========================================================
-   SAVE FOOTER DATA
-========================================================= */
-
 function saveFooterSettings(settings) {
     saveJSON(
         FOOTER_STORAGE_KEY,
         settings
     );
 }
-
-
-/* =========================================================
-   SOCIAL ICONS
-========================================================= */
-
 function getSocialIcon(type) {
-
     switch (type) {
-
         case "instagram":
-
             return `
                 <svg
                     viewBox="0 0 24 24"
@@ -3014,7 +1877,6 @@ function getSocialIcon(type) {
                         stroke="currentColor"
                         stroke-width="2"
                     />
-
                     <circle
                         cx="12"
                         cy="12"
@@ -3023,7 +1885,6 @@ function getSocialIcon(type) {
                         stroke="currentColor"
                         stroke-width="2"
                     />
-
                     <circle
                         cx="17.5"
                         cy="6.5"
@@ -3031,10 +1892,7 @@ function getSocialIcon(type) {
                     />
                 </svg>
             `;
-
-
         case "whatsapp":
-
             return `
                 <svg
                     viewBox="0 0 24 24"
@@ -3045,10 +1903,7 @@ function getSocialIcon(type) {
                     />
                 </svg>
             `;
-
-
         case "linkedin":
-
             return `
                 <svg
                     viewBox="0 0 24 24"
@@ -3059,10 +1914,7 @@ function getSocialIcon(type) {
                     />
                 </svg>
             `;
-
-
         default:
-
             return `
                 <svg
                     viewBox="0 0 24 24"
@@ -3079,14 +1931,7 @@ function getSocialIcon(type) {
                 </svg>
             `;
     }
-
 }
-
-
-/* =========================================================
-   RENDER FOOTER FROM SERVER
-========================================================= */
-
 async function fetchPublicFooter() {
     try {
         const response =
@@ -3097,26 +1942,21 @@ async function fetchPublicFooter() {
                     cache: "no-store"
                 }
             );
-
         if (!response.ok) {
             throw new Error(
                 `Footer API returned ${response.status}`
             );
         }
-
         return await response.json();
     } catch (error) {
         console.warn(
             "Using local footer fallback:",
             error
         );
-
         const local =
             getFooterSettings();
-
         const site =
             getSite();
-
         return {
             ...DEFAULT_FOOTER_SETTINGS,
             ...local,
@@ -3136,17 +1976,14 @@ async function fetchPublicFooter() {
         };
     }
 }
-
 function renderFooter(settings) {
     if (!settings) {
         return;
     }
-
     const logo =
         document.getElementById(
             "footerLogo"
         );
-
     if (logo) {
         logo.src =
             settings.logoSrc ||
@@ -3155,56 +1992,45 @@ function renderFooter(settings) {
             settings.logoAlt ||
             "Alpha Q7 Trading Institute";
     }
-
     const description =
         document.getElementById(
             "footerDescription"
         );
-
     if (description) {
         description.textContent =
             settings.description || "";
     }
-
     const contact =
         settings.contact || {};
-
     const contactTitle =
         document.getElementById(
             "footerContactTitle"
         );
-
     if (contactTitle) {
         contactTitle.textContent =
             settings.contactTitle ||
             "Contact";
     }
-
     const whatsapp =
         document.getElementById(
             "footerWhatsapp"
         );
-
     if (whatsapp) {
         const cleanNumber =
             String(
                 contact.whatsapp ||
                 DEFAULT_WHATSAPP
             ).replace(/\D/g, "");
-
         whatsapp.href =
             `https://wa.me/${cleanNumber}`;
-
         whatsapp.textContent =
             contact.phone ||
             `+${cleanNumber}`;
     }
-
     const email =
         document.getElementById(
             "footerEmail"
         );
-
     if (email) {
         if (contact.email) {
             email.hidden = false;
@@ -3216,12 +2042,10 @@ function renderFooter(settings) {
             email.hidden = true;
         }
     }
-
     const address =
         document.getElementById(
             "footerAddress"
         );
-
     if (address) {
         const mapUrl = String(contact.mapUrl || "").trim();
         const addressText = String(contact.address || "").trim();
@@ -3237,56 +2061,44 @@ function renderFooter(settings) {
             address.removeAttribute("rel");
         }
     }
-
     const columns =
         document.getElementById(
             "footerColumns"
         );
-
     if (columns) {
         columns.innerHTML = "";
-
         (settings.columns || [])
             .forEach(column => {
                 const wrapper =
                     document.createElement(
                         "div"
                     );
-
                 wrapper.className =
                     "footer-column";
-
                 const heading =
                     document.createElement(
                         "h4"
                     );
-
                 heading.textContent =
                     column.title || "";
-
                 wrapper.appendChild(
                     heading
                 );
-
                 (column.links || [])
                     .forEach(item => {
                         const link =
                             document.createElement(
                                 "a"
                             );
-
                         link.href =
                             item.url || "#";
-
                         link.textContent =
                             item.label || "";
-
                         link.target =
                             item.target ===
                             "_blank"
                                 ? "_blank"
                                 : "_self";
-
                         if (
                             link.target ===
                             "_blank"
@@ -3294,26 +2106,21 @@ function renderFooter(settings) {
                             link.rel =
                                 "noopener noreferrer";
                         }
-
                         wrapper.appendChild(
                             link
                         );
                     });
-
                 columns.appendChild(
                     wrapper
                 );
             });
     }
-
     const socialsContainer =
         document.getElementById(
             "footerSocials"
         );
-
     if (socialsContainer) {
         socialsContainer.innerHTML = "";
-
         (settings.socials || [])
             .filter(
                 social =>
@@ -3325,7 +2132,6 @@ function renderFooter(settings) {
                     document.createElement(
                         "a"
                     );
-
                 link.className =
                     "footer-social-link";
                 link.href =
@@ -3345,13 +2151,11 @@ function renderFooter(settings) {
                     getSocialIcon(
                         social.type
                     );
-
                 socialsContainer.appendChild(
                     link
                 );
             });
     }
-
     const qr =
         document.getElementById(
             "footerQr"
@@ -3360,7 +2164,6 @@ function renderFooter(settings) {
         document.getElementById(
             "footerQrLink"
         );
-
     if (qr) {
         if (settings.qrImage) {
             qr.src = settings.qrImage;
@@ -3381,38 +2184,30 @@ function renderFooter(settings) {
             if (qrLink) qrLink.hidden = true;
         }
     }
-
     const bottom =
         settings.bottom || {};
-
     const copyright =
         document.getElementById(
             "footerCopyright"
         );
-
     if (copyright) {
         copyright.textContent =
             bottom.copyright || "";
     }
-
     const disclaimer =
         document.getElementById(
             "footerDisclaimer"
         );
-
     if (disclaimer) {
         disclaimer.textContent =
             bottom.disclaimer || "";
     }
-
     const legal =
         document.getElementById(
             "footerLegalLinks"
         );
-
     if (legal) {
         legal.innerHTML = "";
-
         (bottom.legalLinks || [])
             .forEach(item => {
                 const link =
@@ -3439,18 +2234,12 @@ function renderFooter(settings) {
             });
     }
 }
-
 async function refreshFooter() {
     const settings =
         await fetchPublicFooter();
     renderFooter(settings);
     return settings;
 }
-
-/* =========================================================
-   CUSTOM SECTIONS
-========================================================= */
-
 async function fetchCustomSections() {
     try {
         const response = await fetch('/api/sections/public');
@@ -3464,7 +2253,6 @@ async function fetchCustomSections() {
         return [];
     }
 }
-
 function renderCustomSections(sections) {
     const container = document.getElementById('customSectionsContainer');
     if (!container) return;
@@ -3475,34 +2263,26 @@ function renderCustomSections(sections) {
         sectionEl.className = 'section custom-section';
         sectionEl.style.setProperty('--custom-section-background', section.backgroundColor || '#11100d');
         sectionEl.style.setProperty('--custom-section-text', section.textColor || '#ffffff');
-        
         const containerEl = document.createElement('div');
         containerEl.className = 'container';
-        
         const headingEl = document.createElement('div');
         headingEl.className = 'section-heading';
-        
         const titleEl = document.createElement('h2');
         titleEl.textContent = section.title;
         headingEl.appendChild(titleEl);
-        
         if (section.description) {
             const descEl = document.createElement('p');
             descEl.textContent = section.description;
             headingEl.appendChild(descEl);
         }
-        
         containerEl.appendChild(headingEl);
-        
         if (section.items && section.items.length > 0) {
             const itemsGridEl = document.createElement('div');
             itemsGridEl.className = 'custom-section-items';
             itemsGridEl.dataset.itemCount = String(section.items.length);
-            
             section.items.forEach(item => {
                 const itemEl = document.createElement('div');
                 itemEl.className = 'custom-item';
-                
                 if (item.image) {
                     const imageEl = document.createElement('img');
                     imageEl.src = item.image;
@@ -3511,36 +2291,28 @@ function renderCustomSections(sections) {
                     imageEl.className = 'custom-item-image';
                     itemEl.appendChild(imageEl);
                 }
-
                 if (item.heading) {
                     const itemHeadingEl = document.createElement('h3');
                     itemHeadingEl.textContent = item.heading;
                     itemEl.appendChild(itemHeadingEl);
                 }
-                
                 if (item.content) {
                     const itemContentEl = document.createElement('p');
                     itemContentEl.textContent = item.content;
                     itemEl.appendChild(itemContentEl);
                 }
-                
                 itemsGridEl.appendChild(itemEl);
             });
-            
             containerEl.appendChild(itemsGridEl);
         }
-        
         sectionEl.appendChild(containerEl);
         container.appendChild(sectionEl);
     });
 }
-
 async function refreshCustomSections() {
     const sections = await fetchCustomSections();
     renderCustomSections(sections);
 }
-
 document.addEventListener('DOMContentLoaded', async () => {
     await refreshCustomSections();
 });
-
